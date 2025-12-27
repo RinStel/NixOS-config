@@ -23,9 +23,13 @@
     cmatrix
     obsidian
     yazi
+    bat
+    lsd
+    wireguard-tools
  ];
 
-  # 启用 libvirt 服务，这是使用 virt-manager 的前提
+
+# 启用 libvirt 服务
   virtualisation.libvirtd = {
     enable = true;
    # 启用 virtiofsd 支持，这会自动处理 qemu 依赖
