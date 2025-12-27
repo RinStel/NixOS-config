@@ -23,9 +23,17 @@ export XMODIFIERS=@im=fcitx
 
 # Kitty 终端特效
 if [[ "$TERM" == "xterm-kitty" ]] ; then
-    fastfetch -c /usr/share/fastfetch/presets/examples/21.jsonc
-  # --kitty-direct ~/.config/fastfetch/openbit.png
+    fastfetch -c /run/current-system/sw/share/fastfetch/presets/examples/21.jsonc \
+              --logo ~/.config/fastfetch/openbit.png \
+              --logo-type kitty-direct \
+              --logo-width 12 \
+              --logo-height 0
 fi
+
+#if [[ "$TERM" == "xterm-kitty" ]] ; then
+#    fastfetch -c /run/current-system/sw/share/fastfetch/presets/examples/21.jsonc
+  # --kitty-direct ~/.config/fastfetch/openbit.png
+#fi
 
 # 只在交互式 shell 中执行以下内容
 if [[ $- == *i* ]]; then
