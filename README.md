@@ -18,6 +18,27 @@
 - 导入仓库中的nix配置文件
 - 重建系统
 
+#### 目录结构
+
+```
+/etc/nixos
+ .
+├──  configuration.nix
+├──  flake.lock
+├──  flake.nix
+├──  hardware-configuration.nix
+└──  modules
+    ├──  chinese.nix
+    ├──  niri.nix
+    ├──  noctalia.nix
+    ├──  nvidia.nix
+    ├──  programs.nix
+    └──  virtualization.nix
+```
+
+
+
+
 #### 使用说明
 
 
