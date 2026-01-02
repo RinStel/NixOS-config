@@ -1,19 +1,24 @@
 # 3N-DE
 
 #### 介绍
-3N桌面 desktop environment ： NixOS + Niri + Noctalia 的组合
+3N桌面 desktop environment ： NixOS + Niri + Noctalia 的组合,包含：
+
+- NixOS​ - 声明式Linux发行版
+- Niri​ - 平铺式Wayland合成器
+- Noctalia​ - 简洁美观的Shell界面
 
 
 #### 配置文件
-https://gitee.com/openbit/nixos-niri-noctalia
-
+- dotfiles 美化配
+- Nixos 模块配置
 
 #### 安装教程
 
-
+- 安装Nixos
+- 导入仓库中的nix配置文件
+- 重建系统
 
 #### 使用说明
-
 
 
 #### 参与贡献
