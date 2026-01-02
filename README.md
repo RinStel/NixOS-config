@@ -21,8 +21,7 @@
 #### 目录结构
 
 ```bash
-/etc/nixos
- .
+ /etc/nixos/.
 ├──  configuration.nix
 ├──  flake.lock
 ├──  flake.nix
