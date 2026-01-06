@@ -114,7 +114,7 @@
   services.openssh.enable = true;
 
   # This value determines the NixOS release from which the default
-  system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 
   swapDevices = [
     { device = "/dev/disk/by-label/nixos-swap"; }
