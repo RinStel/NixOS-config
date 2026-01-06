@@ -286,3 +286,5 @@ binds {
     Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
     Mod+Ctrl+Shift+WheelScrollUp { move-column-left; }
 }
+
+spawn-at-startup "noctalia-shell"

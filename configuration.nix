@@ -16,8 +16,8 @@
 
   boot.supportedFilesystems = [ "ntfs" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "forge"; # Define your hostname.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -84,9 +84,9 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.jadmin = {
+  users.users.zikun = {
     isNormalUser = true;
-    description = "jadmin";
+    description = "zikun";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "qemu" "kvm" ];
     packages = with pkgs; [
     #  thunderbird
@@ -111,9 +111,14 @@
 
 
   # Enable the OpenSSH daemon.
-   services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # This value determines the NixOS release from which the default
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
+
+  swapDevices = [
+    { device = "/dev/disk/by-label/nixos-swap"; }
+  ];
+  boot.resumeDevice = "/dev/disk/by-label/nixos-swap";
 
 }
