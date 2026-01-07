@@ -51,13 +51,6 @@
     seahorse
   ];
 
-  services.mihomo = {
-    enable = true;
-    configFile = "/etc/mihomo/config.yaml";
-    tunMode = true;
-    webui = pkgs.metacubexd;
-  };
-
 # 启用 libvirt 服务
   virtualisation.libvirtd = {
     enable = true;
