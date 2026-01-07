@@ -7,6 +7,9 @@ prefer-no-csd
 
 // ================ 输入设备配置 ================
 input {
+    // 修复：睡眠后唤醒时循环进入和退出睡眠
+    disable-power-key-handling
+
     // 键盘设置
     keyboard {
         xkb {

@@ -141,12 +141,7 @@
     [system_default_sect]
     CipherString = Default:@SECLEVEL=0
   '';
-  
-  services.logind.settings.Login = {
-    HandlePowerKey = "ignore";
-    # 建议保留，避免刚恢复时设备状态抖动
-    HoldoffTimeoutSec = "30s";
-  };
+
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
