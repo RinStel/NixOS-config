@@ -125,22 +125,27 @@ window-rule {
     open-maximized true
 }
 
-/*
-// ================ 显示输出配置 (当前禁用) ================
-output "DP-3" {
-    mode "3840x2160@240"  // 4K 240Hz显示器
-    scale 2               // 200%缩放
+
+// ================ 显示输出配置 ================
+output "eDP-1" {
+    mode  "2880x1800@120.000"
+    scale 1.75
     transform "normal"    // 无旋转
     variable-refresh-rate on-demand=true  // 启用可变刷新率
-    position x=0 y=0      // 主显示器位置
+    
+    // 下边沿对齐：412 + 1028 = 1440
+    position x=0 y=412
 }
 
-output "DP-2" {
-    mode "2560x1440@240"  // 2K 240Hz显示器
+output "HDMI-A-1" {
+    mode  "2560x1440@144.000"
     scale 1               // 100%缩放
-    position x=1920 y=0   // 位于主显示器右侧
+    variable-refresh-rate on-demand=true
+
+    // 放在内屏右侧
+    position x=1646 y=0
 }
-*/
+
 
 // ================ 快捷键绑定 ================
 binds {
