@@ -37,7 +37,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "home-bak";
+          home-manager.backupFileExtension = "hm-bak";
           home-manager.users.zikun = import ./home.nix;
         }
       ] ++ generatedModules; 

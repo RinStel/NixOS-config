@@ -17,14 +17,18 @@
   boot.supportedFilesystems = [ "ntfs" ];
 
   networking.hostName = "forge"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;
+  networking.wireless.enable = true;
 
   # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.proxy.default = "http://127.0.0.1:7890/";
+  networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+  # PPD
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
+
+  security.polkit.enable = true;
 
   # 开启flake
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -49,8 +53,10 @@
   # Enable the GNOME Desktop Environment.
  # services.xserver.displayManager.gdm.enable = true;
  # services.xserver.desktopManager.gnome.enable = true;
-  services.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = false;
   services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.wayland = true;
+  services.displayManager.defaultSession = "niri";
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -87,7 +93,7 @@
   users.users.zikun = {
     isNormalUser = true;
     description = "zikun";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "qemu" "kvm" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "input" "libvirtd" "qemu" "kvm" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -97,11 +103,18 @@
   nixpkgs.config.allowUnfree = true;
 
   # enable Hyprland
-  programs.hyprland.enable = true; 
+  programs.hyprland.enable = false; 
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    brightnessctl
+
    gnome-extension-manager
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
@@ -109,16 +122,36 @@
     gst_all_1.gst-plugins-ugly
   ];
 
+  # Attention this
+  environment.pathsToLink = [
+    "/share/fastfetch"
+    "/share/wayland-sessions"
+  ];
+
+
+  # 修复：无法连接不遵循规范的的WPA2企业网络
+  systemd.services.wpa_supplicant.environment.OPENSSL_CONF = pkgs.writeText "openssl.cnf" ''
+    openssl_conf = openssl_init
+    [openssl_init]
+    ssl_conf = ssl_sect
+    [ssl_sect]
+    system_default = system_default_sect
+    [system_default_sect]
+    Options = UnsafeLegacyRenegotiation
+    [system_default_sect]
+    CipherString = Default:@SECLEVEL=0
+  '';
+  
+  services.logind.settings.Login = {
+    HandlePowerKey = "ignore";
+    # 建议保留，避免刚恢复时设备状态抖动
+    HoldoffTimeoutSec = "30s";
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
   # This value determines the NixOS release from which the default
   system.stateVersion = "26.05"; # Did you read the comment?
-
-  swapDevices = [
-    { device = "/dev/disk/by-label/nixos-swap"; }
-  ];
-  boot.resumeDevice = "/dev/disk/by-label/nixos-swap";
 
 }

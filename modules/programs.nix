@@ -10,6 +10,18 @@
 # 启用 virt-manager 程序
   programs.virt-manager.enable = true;
 
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.gdm.enableGnomeKeyring = true;
+
+  programs.thunar.enable = true;
+  programs.thunar.plugins = with pkgs; [
+    thunar-volman
+    thunar-archive-plugin
+    thunar-media-tags-plugin
+  ];
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
+
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -17,6 +29,9 @@
     starship
     kitty
     fastfetch
+    
+    unzip
+
     nerd-fonts.jetbrains-mono
     helix
     btop
@@ -26,8 +41,22 @@
     bat
     lsd
     wireguard-tools
- ];
 
+    google-chrome
+    telegram-desktop
+    spotify
+    playerctl
+
+    libsecret
+    seahorse
+  ];
+
+  services.mihomo = {
+    enable = true;
+    configFile = "/etc/mihomo/config.yaml";
+    tunMode = true;
+    webui = pkgs.metacubexd;
+  };
 
 # 启用 libvirt 服务
   virtualisation.libvirtd = {
