@@ -130,6 +130,9 @@
   ];
 
 
+  # 解决切换到Windows系统后时间异常的问题
+  time.hardwareClockInLocalTime = true;
+
   # 修复：无法连接不遵循规范的的WPA2企业网络
   systemd.services.wpa_supplicant.environment.OPENSSL_CONF = pkgs.writeText "openssl.cnf" ''
     openssl_conf = openssl_init
