@@ -1,6 +1,14 @@
-{ pkgs, inputs, ... }: {
-  environment.systemPackages = with pkgs; [
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default 
-    # ... 可能还有其他软件包
-  ];
+{ pkgs, inputs, ... }:
+
+{  
+  home-manager.users.zikun = {
+    imports = [
+      inputs.noctalia.homeModules.default
+    ];
+
+    programs.noctalia-shell = {
+      enable = true;
+      settings = ./noctalia-settings.json;
+    };
+  };
 }
