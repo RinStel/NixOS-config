@@ -124,6 +124,15 @@
   ];
 
 
+  services.logind.settings.Login = {
+    # 合盖时挂起
+    HandleLidSwitch = "suspend";
+    # 接外接电源时合盖挂起（可按需改成 "ignore"/"lock", 但lock有信号传递上的问题）
+    HandleLidSwitchExternalPower = "suspend";
+    # 外接显示器/“docked”状态下的合盖行为
+    HandleLidSwitchDocked = "suspend";
+  };
+
   # 解决切换到Windows系统后时间异常的问题
   time.hardwareClockInLocalTime = true;
 
