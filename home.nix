@@ -1,5 +1,32 @@
 { config, pkgs, ... }:
 
+let
+  lockCmd = "${config.home.profileDirectory}/bin/noctalia-shell ipc call lockScreen lock";
+  dpmsOff = "${pkgs.niri}/bin/niri msg action power-off-monitors";
+  dpmsOn  = "${pkgs.niri}/bin/niri msg action power-on-monitors";
+
+
+  # Noctalia 的 lockScreen（ext-session-lock）在 niri 下会更新 logind 的 LockedHint（可用于判断是否处于锁定）
+  # 参考：niri issue #2439 的描述。:contentReference[oaicite:2]{index=2}
+  dpmsOffIfLocked = pkgs.writeShellScript "dpms-off-if-locked" ''
+    set -eu
+    sid="''${XDG_SESSION_ID:-self}"
+    locked="$(${pkgs.systemd}/bin/loginctl show-session "$sid" -p LockedHint --value 2>/dev/null || echo no)"
+    if [ "$locked" = "yes" ]; then
+      ${dpmsOff}
+      : > "''${XDG_RUNTIME_DIR}/dpms_off_by_idle"
+    fi
+  '';
+  dpmsOnIfNeeded = pkgs.writeShellScript "dpms-on-if-needed" ''
+    set -eu
+    f="''${XDG_RUNTIME_DIR}/dpms_off_by_idle"
+    if [ -e "$f" ]; then
+      rm -f "$f"
+      ${dpmsOn}
+    fi
+  '';
+in
+
 {
   home.username = "zikun";
   home.homeDirectory = "/home/zikun";
@@ -46,4 +73,18 @@
     TerminalEmulatorDismissed=true
   '';
 
+
+  services.swayidle = {
+    enable = true;
+    timeouts = [
+      # 5 分钟无操作 -> 熄屏
+      { timeout = 300; command = "${dpmsOffIfLocked}"; resumeCommand = "${dpmsOnIfNeeded}"; }
+      # 再过 15 秒无操作 → Noctalia 锁屏
+      { timeout = 315; command = lockCmd; }
+    ];
+    events = {
+      before-sleep = lockCmd;
+      after-resume = dpmsOn;
+    };
+  };
 }
