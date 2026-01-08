@@ -116,7 +116,7 @@
       XCURSOR_THEME "Bibata-Modern-Ice"
       XCURSOR_SIZE "24"
 
-      # 让 greeter 的 GTK theme 和 programs.regreet.theme 一致
+      // 让 greeter 的 GTK theme 和 programs.regreet.theme 一致
       GTK_THEME "adw-gtk3-dark"
     }
 
