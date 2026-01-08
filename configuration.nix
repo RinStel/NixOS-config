@@ -103,9 +103,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # enable Hyprland
-  programs.hyprland.enable = false; 
-
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
