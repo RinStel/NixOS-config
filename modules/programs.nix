@@ -47,6 +47,8 @@
     spotify
     playerctl
 
+    wechat-uos
+
     libsecret
     seahorse
   ];

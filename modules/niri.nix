@@ -2,15 +2,17 @@
 
 {
 
-# niri设置
-programs.niri.enable = true;
+  # niri设置
+  programs.niri.enable = true;
 
-environment.systemPackages = with pkgs; [
-   fuzzel
-   bibata-cursors
+  environment.systemPackages = with pkgs; [
+    xwayland-satellite
+
+    fuzzel
+    bibata-cursors
   ];
 
-environment.variables = {
+  environment.variables = {
     XCURSOR_THEME = "Bibata-Modern-Ice";
     XCURSOR_SIZE = "24";  
   };
