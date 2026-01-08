@@ -120,7 +120,7 @@
       GTK_THEME "adw-gtk3-dark"
     }
 
-    spawn-at-startup "sh" "-c" "${pkgs.greetd.regreet}/bin/regreet; ${pkgs.niri}/bin/niri msg action quit --skip-confirmation"
+    spawn-at-startup "sh" "-c" "${pkgs.regreet}/bin/regreet; ${pkgs.niri}/bin/niri msg action quit --skip-confirmation"
   '';
 
 }
