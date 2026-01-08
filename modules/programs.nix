@@ -11,7 +11,6 @@
   programs.virt-manager.enable = true;
 
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.gdm.enableGnomeKeyring = true;
 
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs; [
