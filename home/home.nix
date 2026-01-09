@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   lockCmd = "${config.home.profileDirectory}/bin/noctalia-shell ipc call lockScreen lock";
@@ -54,8 +54,30 @@ in
   xdg.enable = true;
   xdg.configFile."btop".source = ../dotfiles/.config/btop;
   xdg.configFile."fastfetch".source = ../dotfiles/.config/fastfetch;
-  xdg.configFile."kitty".source = ../dotfiles/.config/kitty;
-  xdg.configFile."niri".source = ../dotfiles/.config/niri;
+
+  # --- 下面这部分对 Noctalia 的主题联动做了适配 ---
+  xdg.configFile."kitty/kitty.conf".source = ../dotfiles/.config/kitty/kitty.conf;
+  xdg.configFile."kitty/scroll_mark.py".source = ../dotfiles/.config/kitty/scroll_mark.py;
+  xdg.configFile."kitty/search.py".source = ../dotfiles/.config/kitty/search.py;
+
+  xdg.configFile."niri/config.kdl".source = ../dotfiles/.config/niri/config.kdl;
+
+  # 确保 Noctalia 要写的文件存在且为“普通文件”（不是 symlink）
+  home.activation.fixNoctaliaWritableTargets = lib.hm.dag.entryBefore ["writeBoundary"] ''
+    # 1) 先把 ~/.config/kitty 和 ~/.config/niri 从 symlink 还原成真实目录
+    if [ -L "$HOME/.config/kitty" ]; then rm -f "$HOME/.config/kitty"; fi
+    if [ -L "$HOME/.config/niri" ]; then rm -f "$HOME/.config/niri"; fi
+    mkdir -p "$HOME/.config/kitty" "$HOME/.config/niri"
+
+    # 2) 确保 noctalia 输出文件是“普通文件”（不是 symlink）
+    if [ -L "$HOME/.config/kitty/noctalia.conf" ]; then rm -f "$HOME/.config/kitty/noctalia.conf"; fi
+    if [ -L "$HOME/.config/niri/noctalia.kdl" ]; then rm -f "$HOME/.config/niri/noctalia.kdl"; fi
+
+    test -e "$HOME/.config/kitty/noctalia.conf" || : > "$HOME/.config/kitty/noctalia.conf"
+    test -e "$HOME/.config/niri/noctalia.kdl" || : > "$HOME/.config/niri/noctalia.kdl"
+  '';
+  # ------------------------------------------------
+
 
   # 将kitty作为默认终端
   xdg.dataFile."xfce4/helpers/kitty.desktop".text = ''
