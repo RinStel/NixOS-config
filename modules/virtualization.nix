@@ -1,77 +1,67 @@
-# virtualization.nix
-{pkgs, ...}: {
-  # Only enable either docker or podman -- Not both
+# virtualization.nix (unstable, AMD, virtiofs share, PCI passthrough-ready)
+{ pkgs, ... }:
+{
   virtualisation = {
-    docker = {
-      enable = true;
-    };
-
+    docker.enable = true;
     podman.enable = false;
 
     libvirtd = {
       enable = true;
       onBoot = "start";
       onShutdown = "shutdown";
+
+      # 如果你系统是 nftables，建议让 libvirt 也用 nftables（避免规则分裂）
+      # firewallBackend = "nftables";
+
       qemu = {
-        runAsRoot = false;
-        # ovmf submodule REMOVED: All OVMF images are now available by default in nixpkgs-unstable
-        swtpm.enable = true; # TPM emulation
-        verbatimConfig = ''
-          user = "qemu-libvirtd"
-          group = "kvm"
-          dynamic_ownership = 1
-          remember_owner = 0
-        '';
+        package = pkgs.qemu_kvm;
+        runAsRoot = false;     # 非特权 qemu（需要注意权限，见下）
+        swtpm.enable = true;   # Win11/TPM（你没开BitLocker也不冲突）
+
+        # 共享目录（virtiofs）必需
+        vhostUserPackages = with pkgs; [ virtiofsd ];
+
+        # 建议先去掉你原来的 verbatimConfig（避免覆盖模块默认qemu.conf）
+        # verbatimConfig = "";
       };
-      allowedBridges = [
-        "virbr0" # Default NAT bridge
-        "br0" # Custom bridge if needed
-      ];
     };
 
-    # Kernel modules for better VM performance
     spiceUSBRedirection.enable = true;
   };
 
-  programs = {
-    virt-manager.enable = true;
-    dconf.enable = true; # Required for virt-manager settings
-  };
+  programs.virt-manager.enable = true;
+  programs.dconf.enable = true;
 
+  users.users.zikun.extraGroups = [ "libvirtd" "kvm" "qemu" ];
+
+  # 默认 NAT 网络（virbr0）所需
   environment.systemPackages = with pkgs; [
-    virt-viewer # View Virtual Machines
-    lazydocker
-    docker-client
-    qemu_kvm # KVM support
-    OVMF # UEFI firmware
-    swtpm # TPM emulation
-    libguestfs # VM disk tools
-    virt-top # Monitor VM performance
-    spice # SPICE protocol support
-    spice-gtk # SPICE client GTK
-    spice-protocol # SPICE protocol headers
-    virglrenderer # Virtual GPU support
-    mesa # OpenGL support for VMs
+    dnsmasq
+    virt-viewer
+    libguestfs
   ];
 
-  # Enable necessary kernel modules for VM performance
-  boot.kernelModules = ["kvm-amd" "kvm-intel" "vfio-pci"];
+  # PCI passthrough：VFIO 模块放 initrd，保证早于显卡等早期驱动加载
+  boot.initrd.kernelModules = [
+    "vfio_pci"
+    "vfio"
+    "vfio_iommu_type1"
+  ];
 
-  # Add boot kernel parameters for better graphics support
+  # AMD IOMMU
   boot.kernelParams = [
-    "intel_iommu=on"
+    "amd_iommu=on"
     "iommu=pt"
+    # 需要直通某设备时再加，例如：
+    # "vfio-pci.ids=1002:XXXX,1002:YYYY"
   ];
 
-  # Enable OpenGL support
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
+  # 只保留 AMD 的 KVM 模块（通常也可不写，内核会自动加载）
+  boot.kernelModules = [ "kvm-amd" ];
 
-  # Create default ISO and VM directories with correct permissions
-  systemd.tmpfiles.rules = [
-    "d /var/lib/libvirt/isos 0755 qemu-libvirtd kvm -"
-    "d /var/lib/libvirt/images 0755 qemu-libvirtd kvm -"
-  ];
+  # NAT + 转发（你要让 Windows 流量跟宿主共网、走 mihomo tun 时通常需要）
+  boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
+  networking.firewall.checkReversePath = false;
 }
+

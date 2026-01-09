@@ -91,7 +91,7 @@
   users.users.zikun = {
     isNormalUser = true;
     description = "zikun";
-    extraGroups = [ "networkmanager" "wheel" "video" "input" "libvirtd" "qemu" "kvm" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "input" ];
     packages = with pkgs; [
     #  thunderbird
     ];
