@@ -80,10 +80,12 @@ in
   services.swayidle = {
     enable = true;
     timeouts = [
-      # 5 分钟无操作 -> Noctalia 锁屏
+      # 5 分钟无操作 -> Noctalia 锁定
       { timeout = 300; command = lockCmd; }
       # 再过 15 秒无操作 → 熄屏
       { timeout = 315; command = "${dpmsOffIfLocked}"; resumeCommand = "${dpmsOnIfNeeded}"; }
+      # 主动锁定的情况
+      { timeout = 25; command = "${dpmsOffIfLocked}"; resumeCommand = "${dpmsOnIfNeeded}"; }
     ];
     events = {
       before-sleep = lockCmd;
