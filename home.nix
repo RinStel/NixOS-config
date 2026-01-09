@@ -53,7 +53,6 @@ in
   xdg.configFile."kitty".source = ./dotfiles/.config/kitty;
   xdg.configFile."niri".source = ./dotfiles/.config/niri;
 
-  
   # 将kitty作为默认终端
   xdg.dataFile."xfce4/helpers/kitty.desktop".text = ''
     [Desktop Entry]
@@ -77,10 +76,10 @@ in
   services.swayidle = {
     enable = true;
     timeouts = [
-      # 5 分钟无操作 -> 熄屏
-      { timeout = 300; command = "${dpmsOffIfLocked}"; resumeCommand = "${dpmsOnIfNeeded}"; }
-      # 再过 15 秒无操作 → Noctalia 锁屏
-      { timeout = 315; command = lockCmd; }
+      # 5 分钟无操作 -> Noctalia 锁屏
+      { timeout = 300; command = lockCmd; }
+      # 再过 15 秒无操作 → 熄屏
+      { timeout = 315; command = "${dpmsOffIfLocked}"; resumeCommand = "${dpmsOnIfNeeded}"; }
     ];
     events = {
       before-sleep = lockCmd;
