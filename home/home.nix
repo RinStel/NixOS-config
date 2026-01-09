@@ -32,6 +32,10 @@ in
   home.homeDirectory = "/home/zikun";
   home.stateVersion = "26.05";
 
+  imports = [
+    ./modules/vscode.nix
+  ];
+
   gtk = {
     enable = true;
     colorScheme = "dark";
@@ -43,15 +47,15 @@ in
   };
   
   programs.home-manager.enable = true;
-  home.file.".bashrc".source = ./dotfiles/.bashrc;
-  home.file.".inputrc".source = ./dotfiles/.inputrc;
-  home.file.".vimrc".source = ./dotfiles/.vimrc;
+  home.file.".bashrc".source = ../dotfiles/.bashrc;
+  home.file.".inputrc".source = ../dotfiles/.inputrc;
+  home.file.".vimrc".source = ../dotfiles/.vimrc;
 
   xdg.enable = true;
-  xdg.configFile."btop".source = ./dotfiles/.config/btop;
-  xdg.configFile."fastfetch".source = ./dotfiles/.config/fastfetch;
-  xdg.configFile."kitty".source = ./dotfiles/.config/kitty;
-  xdg.configFile."niri".source = ./dotfiles/.config/niri;
+  xdg.configFile."btop".source = ../dotfiles/.config/btop;
+  xdg.configFile."fastfetch".source = ../dotfiles/.config/fastfetch;
+  xdg.configFile."kitty".source = ../dotfiles/.config/kitty;
+  xdg.configFile."niri".source = ../dotfiles/.config/niri;
 
   # 将kitty作为默认终端
   xdg.dataFile."xfce4/helpers/kitty.desktop".text = ''

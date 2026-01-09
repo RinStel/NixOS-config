@@ -42,11 +42,11 @@
     wireguard-tools
 
     google-chrome
-    telegram-desktop
     spotify
     playerctl
 
     wechat-uos
+    telegram-desktop
 
     libsecret
     seahorse
