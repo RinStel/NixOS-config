@@ -30,15 +30,16 @@
     starship
     kitty
     fastfetch
-    
+
+    zip    
     unzip
 
     nerd-fonts.jetbrains-mono
     helix
     btop
     cmatrix
-    obsidian
-    yazi
+    #obsidian
+    #yazi
     bat
     lsd
     wireguard-tools
