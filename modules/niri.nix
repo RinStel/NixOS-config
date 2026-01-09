@@ -7,8 +7,6 @@
 
   environment.systemPackages = with pkgs; [
     xwayland-satellite
-
-    fuzzel
     bibata-cursors
   ];
 

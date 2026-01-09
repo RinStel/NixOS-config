@@ -97,6 +97,15 @@ layout {
     border {
         off
     }
+
+    // 列的标签指示器
+    tab-indicator {
+        on                                   // 开启指示器
+        place-within-column                  // 将标签绘制在列内部
+        position "left"                      // 显示在列左侧（可改为 right/top/bottom）
+        width 7                              // 设置标签条宽度
+        gaps-between-tabs 3                  // 标签之间间距
+    }
 }
 
 // ================ 工作区定义 ================
@@ -152,9 +161,8 @@ output "HDMI-A-1" {
 // ================ 快捷键绑定 ================
 binds {
     // -------- 启动器与系统应用 --------
-    Mod+T hotkey-overlay-title="打开 (Kitty)" { spawn "kitty"; }
-    Mod+D hotkey-overlay-title="Fuzzel" { spawn-sh "fuzzel --config ~/.config/fuzzel/themes/noctalia"; }
-    Mod+B hotkey-overlay-title="firefox" { spawn "firefox"; }
+    Mod+T hotkey-overlay-title="打开终端 (Kitty)" { spawn "kitty"; }
+    Mod+B hotkey-overlay-title="Chrome" { spawn "google-chrome"; }
     Mod+N hotkey-overlay-title="thunar" { spawn "thunar"; }
 
     // -------- Noctalia 特有绑定 --------
@@ -268,6 +276,11 @@ binds {
     Mod+O hotkey-overlay-title="窗口预览 (Toggle Overview)" repeat=false { toggle-overview; }
     Mod+BracketLeft hotkey-overlay-title="窗口靠左侧" repeat=false { consume-or-expel-window-left; }
     Mod+BracketRight hotkey-overlay-title="窗口靠右侧" repeat=false { consume-or-expel-window-right; }  
+
+    // 标签列的操作
+    Mod+X { consume-window-into-column; }         // 加入当前列
+    Mod+Shift+X { expel-window-from-column; }     // 从列里移出
+    Mod+W { toggle-column-tabbed-display; }       // 当前列标签/堆叠切换
 
     // -------- 系统操作 --------
     Mod+Shift+E hotkey-overlay-title="退出 Niri" { quit skip-confirmation=true; }  // 退出 Niri（跳过确认）
