@@ -129,9 +129,9 @@ debug {
     honor-xdg-activation-with-invalid-serial
 }
 
-// Firefox 窗口规则
+// Spotify 窗口规则
 window-rule {
-    match title="Firefox"
+    match app-id="spotify"
     open-on-workspace "c"
     open-maximized true
 }
