@@ -24,9 +24,22 @@
   #networking.proxy.default = "http://127.0.0.1:7890/";
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # PPD
-  services.power-profiles-daemon.enable = true;
+
+  # ---------电源管理与省电---------
   services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
+
+  # NixOS 自带电源管理基线 + powertop 自动调优
+  powerManagement.enable = true;
+  # 注意：powertop会自动挂起外部设备，可能会导致断开连接
+  #powerManagement.powertop.enable = true;
+
+  # CPU 调速策略
+  powerManagement.cpuFreqGovernor = "ondemand"; # 或 "powersave"
+  # Wi-Fi 省电（可能提升续航；若掉线/高延迟就改回 false）
+  networking.networkmanager.wifi.powersave = true;
+  # --------------------------------
+
 
   security.polkit.enable = true;
 
