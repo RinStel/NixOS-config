@@ -19,6 +19,7 @@
   networking.hostName = "forge"; # Define your hostname.
   networking.networkmanager.enable = true;
   networking.wireless.enable = true;
+  hardware.bluetooth.enable = true;
 
   # Configure network proxy if necessary
   #networking.proxy.default = "http://127.0.0.1:7890/";
