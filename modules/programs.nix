@@ -47,9 +47,10 @@
     google-chrome
     spotify
     playerctl
+    telegram-desktop
 
     wechat-uos
-    telegram-desktop
+    onlyoffice-desktopeditors
 
     libsecret
     seahorse
