@@ -19,9 +19,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/latest";
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }: 
+  outputs = inputs@{ self, nixpkgs, nix-flatpak, ... }: 
   let
     lib = nixpkgs.lib;
 
@@ -43,7 +45,9 @@
       
       modules = [
         ./configuration.nix
-        
+
+        nix-flatpak.nixosModules.nix-flatpak
+
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
