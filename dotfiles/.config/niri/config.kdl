@@ -29,8 +29,10 @@ input {
 
     // 鼠标设置
     mouse {
-        accel-profile "flat" // 平坦的鼠标加速曲线
+        accel-profile "flat"  // 平坦的鼠标加速曲线
+        accel-speed 0.4       // 鼠标加速
     }
+    // warp-mouse-to-focus        //设置鼠标移动到新聚焦的窗口
     focus-follows-mouse max-scroll-amount="0%" // 鼠标悬停聚焦窗口
 }
 
