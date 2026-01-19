@@ -2,8 +2,12 @@
 { pkgs, ... }:
 {
   virtualisation = {
-    docker.enable = true;
-    podman.enable = false;
+    docker.enable = false;
+    podman = {
+      enable = true;
+      dockerCompat = true;   # 让 docker 命令也能跑
+      defaultNetwork.settings.dns_enabled = true;
+    };
 
     libvirtd = {
       enable = true;
@@ -34,11 +38,15 @@
 
   users.users.zikun.extraGroups = [ "libvirtd" "kvm" "qemu" ];
 
-  # 默认 NAT 网络（virbr0）所需
   environment.systemPackages = with pkgs; [
+    # 默认 NAT 网络（virbr0）所需
     dnsmasq
     virt-viewer
     libguestfs
+
+    # 虚拟化容器
+    distrobox
+    xdg-utils
   ];
 
   # PCI passthrough：VFIO 模块放 initrd，保证早于显卡等早期驱动加载

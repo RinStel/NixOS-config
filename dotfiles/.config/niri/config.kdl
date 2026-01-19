@@ -159,6 +159,15 @@ output "HDMI-A-1" {
     position x=1646 y=0
 }
 
+output "HDMI-A-2" {
+    mode  "2560x1440@144.000"
+    scale 1               // 100%缩放
+    variable-refresh-rate on-demand=true
+
+    // 放在内屏右侧
+    position x=1646 y=0
+}
+
 
 // ================ 快捷键绑定 ================
 binds {

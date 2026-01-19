@@ -62,11 +62,22 @@
   time.timeZone = "Asia/Shanghai";
 
   # Enable the X11 windowing system.
-  #services.xserver.enable = true;
+  services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
- # services.xserver.displayManager.gdm.enable = true;
- # services.xserver.desktopManager.gnome.enable = true;
+  # 设置 NVIDIA 驱动
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.graphics.enable = true;
+  hardware.nvidia = {
+    modesetting.enable = true;     # 通常开启
+    open = false;                  # 开源模块
+    nvidiaSettings = true;         # 可选：安装 nvidia-settings
+  };
+  environment.variables = {
+    CUDA_PATH = "${pkgs.cudatoolkit}";
+    LD_LIBRARY_PATH = "${pkgs.cudatoolkit}/lib:${pkgs.cudaPackages.cuda_nvcc}/lib";
+  };
+
+
   services.displayManager.defaultSession = "niri";
 
   # Configure keymap in X11
@@ -99,20 +110,26 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.zikun = {
     isNormalUser = true;
     description = "zikun";
-    extraGroups = [ "networkmanager" "wheel" "video" "input" ];
+    extraGroups = [
+      "networkmanager" "wheel" "video" "input"
+      "dialout"   # /dev/ttyUSB*, /dev/ttyACM*
+      "plugdev"   # 一些调试器用
+    ];
     packages = with pkgs; [
     #  thunderbird
     ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;  # Allow unfree packages
+    cudaSupport = true;  # 让包构建时启用 CUDA 支持
+  };
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -122,6 +139,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # NVIDIA
+    cudatoolkit
+    cudaPackages.cuda_nvcc      # nvcc 编译器
+    cudaPackages.cudnn          # 可选：cuDNN
+    # 其他需要的 cudaPackages.*
+
     brightnessctl
 
    gnome-extension-manager
@@ -136,6 +159,29 @@
     "/share/fastfetch"
     "/share/wayland-sessions"
   ];
+
+  # 处理 USB 权限问题
+  services.udev.extraRules = ''
+    # STM32 DFU
+    SUBSYSTEM=="usb", ATTR{idVendor}=="0483", MODE="0666"
+
+    # ST-Link
+    SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3748", MODE="0666"
+
+    # SEGGER J-Link
+    SUBSYSTEM=="usb", ATTR{idVendor}=="1366", MODE="0666"
+
+    # CH340
+    SUBSYSTEM=="usb", ATTR{idVendor}=="1a86", MODE="0666"
+
+    # CP210x
+    SUBSYSTEM=="usb", ATTR{idVendor}=="10c4", MODE="0666"
+
+    # 通用串口
+    KERNEL=="ttyUSB*", MODE="0666"
+    KERNEL=="ttyACM*", MODE="0666"
+  '';
+
 
 
   services.logind.settings.Login = {
