@@ -3,8 +3,8 @@
 {
   programs.direnv.enable = true;
 
-# Install firefox.
-  programs.firefox.enable = true;
+  # Install firefox.
+  #programs.firefox.enable = true;
   
 # 启用 virt-manager 程序
   programs.virt-manager.enable = true;
@@ -76,6 +76,13 @@
       enable = true;
       onCalendar = "weekly";
     };
+  };
+
+  # 安装 Steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remoteplay
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for steam server
   };
 
 
