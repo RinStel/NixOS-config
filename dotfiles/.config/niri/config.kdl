@@ -138,6 +138,13 @@ window-rule {
     open-maximized true
 }
 
+// Steam 窗口规则
+window-rule {
+    match app-id="steam"
+    open-on-workspace "c"
+    open-maximized true
+}
+
 
 // ================ 显示输出配置 ================
 output "eDP-1" {
