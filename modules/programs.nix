@@ -21,17 +21,22 @@
   services.tumbler.enable = true;
 
   environment.systemPackages = with pkgs; [
+    # 基础软件包
     vim
     wget
     git
     starship
     kitty
     fastfetch
-
+    playerctl
+    nerd-fonts.jetbrains-mono
+    libsecret
+    seahorse
     zip    
     unzip
 
-    nerd-fonts.jetbrains-mono
+    # 工具类
+    mangohud  # 用于监视应用的GPU占用和帧率
     helix
     btop
     cmatrix
@@ -41,16 +46,12 @@
     lsd
     wireguard-tools
 
+    # (较)大型第三方软件
     google-chrome
     spotify
-    playerctl
     telegram-desktop
-
     wechat-uos
     onlyoffice-desktopeditors
-
-    libsecret
-    seahorse
   ];
 
   services.flatpak = {
@@ -65,13 +66,13 @@
       "com.dingtalk.DingTalk"  # Flathub 上的 DingTalk AppID
     ];
 
-    # 可选：严格模式——移除所有未在 packages/remotes 里声明的项
-    # uninstallUnmanaged = true;
+    # 严格模式：移除所有未在 packages/remotes 里声明的项
+    uninstallUnmanaged = true;
 
-    # 可选：激活时更新（默认 false）
+    # 激活时更新（默认 false）
     update.onActivation = true;
 
-    # 可选：定时自动更新（系统激活时也会触发）
+    # 定时自动更新（系统激活时也会触发）
     update.auto = {
       enable = true;
       onCalendar = "weekly";
