@@ -151,7 +151,7 @@ output "eDP-1" {
     mode  "2880x1800@120.000"
     scale 1.75
     transform "normal"    // 无旋转
-    variable-refresh-rate on-demand=true  // 启用可变刷新率
+    variable-refresh-rate // 启用可变刷新率
     
     // 下边沿对齐：412 + 1028 = 1440
     position x=0 y=412
@@ -160,7 +160,7 @@ output "eDP-1" {
 output "HDMI-A-1" {
     mode  "2560x1440@144.000"
     scale 1               // 100%缩放
-    variable-refresh-rate on-demand=true
+    variable-refresh-rate //on-demand=true
 
     // 放在内屏右侧
     position x=1646 y=0
@@ -169,7 +169,7 @@ output "HDMI-A-1" {
 output "HDMI-A-2" {
     mode  "2560x1440@144.000"
     scale 1               // 100%缩放
-    variable-refresh-rate on-demand=true
+    variable-refresh-rate //on-demand=true
 
     // 放在内屏右侧
     position x=1646 y=0
