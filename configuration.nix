@@ -64,19 +64,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # 设置 NVIDIA 驱动
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.graphics.enable = true;
-  hardware.nvidia = {
-    modesetting.enable = true;     # 通常开启
-    open = false;                  # 开源模块
-    nvidiaSettings = true;         # 可选：安装 nvidia-settings
-  };
-  environment.variables = {
-    CUDA_PATH = "${pkgs.cudatoolkit}";
-    LD_LIBRARY_PATH = "${pkgs.cudatoolkit}/lib:${pkgs.cudaPackages.cuda_nvcc}/lib";
-  };
-
 
   services.displayManager.defaultSession = "niri";
 
@@ -128,7 +115,6 @@
 
   nixpkgs.config = {
     allowUnfree = true;  # Allow unfree packages
-    cudaSupport = true;  # 让包构建时启用 CUDA 支持
   };
 
   environment.sessionVariables = {
@@ -139,11 +125,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # NVIDIA
-    cudatoolkit
-    cudaPackages.cuda_nvcc      # nvcc 编译器
-    cudaPackages.cudnn          # 可选：cuDNN
-    # 其他需要的 cudaPackages.*
 
     brightnessctl
 
