@@ -37,6 +37,7 @@
 
     # 工具类
     mangohud  # 用于监视应用的GPU占用和帧率
+    gamescope # 游戏兼容性
     helix
     btop
     cmatrix
