@@ -34,6 +34,8 @@
     seahorse
     zip    
     unzip
+    mpv
+    nautilus # 文件选择器
 
     # 工具类
     mangohud  # 用于监视应用的GPU占用和帧率
@@ -46,6 +48,10 @@
     bat
     lsd
     wireguard-tools
+
+    # 开发相关依赖
+    nodejs
+    pnpm
 
     # (较)大型第三方软件
     google-chrome
