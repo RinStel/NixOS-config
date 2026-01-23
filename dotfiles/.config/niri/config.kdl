@@ -183,7 +183,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 binds {
     // -------- 启动器与系统应用 --------
     Mod+T hotkey-overlay-title="打开终端 (Kitty)" { spawn "kitty"; }
-    Mod+B hotkey-overlay-title="Chrome" { spawn "google-chrome"; }
+    Mod+B hotkey-overlay-title="Chrome" { spawn "google-chrome-stable"; }
     Mod+N hotkey-overlay-title="thunar" { spawn "thunar"; }
 
     // -------- Noctalia 特有绑定 --------

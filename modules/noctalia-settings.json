@@ -66,14 +66,14 @@
           "compactMode": false,
           "compactShowAlbumArt": true,
           "compactShowVisualizer": false,
-          "hideMode": "hidden",
+          "hideMode": "idle",
           "hideWhenIdle": false,
           "id": "MediaMini",
           "maxWidth": 145,
           "panelShowAlbumArt": true,
           "panelShowVisualizer": true,
           "scrollingMode": "hover",
-          "showAlbumArt": false,
+          "showAlbumArt": true,
           "showArtistFirst": true,
           "showProgressRing": true,
           "showVisualizer": true,
@@ -134,10 +134,6 @@
           "middleClickCommand": "pwvucontrol || pavucontrol"
         },
         {
-          "displayMode": "onhover",
-          "id": "Brightness"
-        },
-        {
           "deviceNativePath": "",
           "displayMode": "onhover",
           "hideIfIdle": false,
@@ -146,6 +142,23 @@
           "showNoctaliaPerformance": true,
           "showPowerProfiles": true,
           "warningThreshold": 25
+        },
+        {
+          "defaultSettings": {
+            "audioCodec": "opus",
+            "audioSource": "both",
+            "colorRange": "full",
+            "copyToClipboard": true,
+            "directory": "",
+            "filenamePattern": "recording_yyyyMMdd_HHmmss",
+            "frameRate": "60",
+            "quality": "very_high",
+            "resolution": "original",
+            "showCursor": true,
+            "videoCodec": "h264",
+            "videoSource": "portal"
+          },
+          "id": "plugin:screen-recorder"
         },
         {
           "colorizeDistroLogo": false,
