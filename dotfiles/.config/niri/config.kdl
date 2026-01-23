@@ -176,6 +176,9 @@ output "HDMI-A-2" {
 }
 
 
+// 截图保存位置
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
 // ================ 快捷键绑定 ================
 binds {
     // -------- 启动器与系统应用 --------
@@ -321,6 +324,12 @@ binds {
     Mod+Shift+WheelScrollUp { focus-column-left; }
     Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
     Mod+Ctrl+Shift+WheelScrollUp { move-column-left; }
+
+    // 截屏操作
+    Mod+Shift+S { screenshot show-pointer=false; }  // 隐藏鼠标指针
+    Print { screenshot show-pointer=false; }
+    Ctrl+Print { screenshot-screen show-pointer=false; }
+    Alt+Print { screenshot-window; }
 }
 
 // ================ 启动时自动运行的程序 ================
