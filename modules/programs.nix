@@ -40,6 +40,7 @@
     # 工具类
     mangohud  # 用于监视应用的GPU占用和帧率
     gamescope # 游戏兼容性
+    wayscriber # 屏幕批注工具
     helix
     btop
     cmatrix
@@ -59,6 +60,7 @@
     telegram-desktop
     wechat-uos
     onlyoffice-desktopeditors
+    typora
   ];
 
   services.flatpak = {

@@ -183,8 +183,8 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 binds {
     // -------- 启动器与系统应用 --------
     Mod+T hotkey-overlay-title="打开终端 (Kitty)" { spawn "kitty"; }
-    Mod+B hotkey-overlay-title="Chrome" { spawn "google-chrome-stable"; }
-    Mod+N hotkey-overlay-title="thunar" { spawn "thunar"; }
+    Mod+B hotkey-overlay-title="打开 Chrome" { spawn "google-chrome-stable"; }
+    Mod+N hotkey-overlay-title="打开文件浏览器 thunar" { spawn "thunar"; }
 
     // -------- Noctalia 特有绑定 --------
     Mod+S hotkey-overlay-title="控制面板" { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
@@ -195,50 +195,50 @@ binds {
     
     // -------- 焦点移动（HJKL / 方向键） --------
     // 焦点（禁用重复）
-    Mod+Left repeat=false { focus-column-left; }
-    Mod+Down repeat=false { focus-window-down; }
-    Mod+Up repeat=false { focus-window-up; }
+    Mod+Left hotkey-overlay-title="将焦点移到左侧列" repeat=false { focus-column-left; }
     Mod+Right repeat=false { focus-column-right; }
-    Mod+H repeat=false { focus-column-left; }
-    Mod+J repeat=false { focus-window-down; }
-    Mod+K repeat=false { focus-window-up; }
-    Mod+L repeat=false { focus-column-right; }
+    Mod+Up hotkey-overlay-title="将焦点移到上方(同一列)" repeat=false { focus-window-up; }
+    Mod+Down repeat=false { focus-window-down; }
+    //Mod+H repeat=false { focus-column-left; }
+    //Mod+J repeat=false { focus-window-down; }
+    //Mod+K repeat=false { focus-window-up; }
+    //Mod+L repeat=false { focus-column-right; }
 
     // 窗口/列移动（带 Ctrl）
-    Mod+Ctrl+Left { move-column-left; }
-    Mod+Ctrl+Down { move-window-down; }
-    Mod+Ctrl+Up { move-window-up; }
+    Mod+Ctrl+Left hotkey-overlay-title="将窗口移到左侧列" { move-column-left; }
     Mod+Ctrl+Right { move-column-right; }
-    Mod+Ctrl+H { move-column-left; }
-    Mod+Ctrl+J { move-window-down; }
-    Mod+Ctrl+K { move-window-up; }
-    Mod+Ctrl+L { move-column-right; }
+    Mod+Ctrl+Down hotkey-overlay-title="将窗口移到上方(同一列)" { move-window-down; }
+    Mod+Ctrl+Up { move-window-up; }
+    //Mod+Ctrl+H { move-column-left; }
+    //Mod+Ctrl+J { move-window-down; }
+    //Mod+Ctrl+K { move-window-up; }
+    //Mod+Ctrl+L { move-column-right; }
     
-    Mod+Home { focus-column-first; }
+    Mod+Home hotkey-overlay-title="将焦点移到最左侧的列" { focus-column-first; }
     Mod+End { focus-column-last; }
-    Mod+Ctrl+Home { move-column-to-first; }
+    Mod+Ctrl+Home hotkey-overlay-title="将列移到最左侧" { move-column-to-first; }
     Mod+Ctrl+End { move-column-to-last; }
 
     // -------- 显示器导航 --------
     // 焦点到显示器（带 Shift）
-    Mod+Shift+Left { focus-monitor-left; }
-    Mod+Shift+Down { focus-monitor-down; }
-    Mod+Shift+Up { focus-monitor-up; }
+    Mod+Shift+Left  hotkey-overlay-title="将焦点移到左侧显示器" { focus-monitor-left; }
     Mod+Shift+Right { focus-monitor-right; }
-    Mod+Shift+H { focus-monitor-left; }
-    Mod+Shift+J { focus-monitor-down; }
-    Mod+Shift+K { focus-monitor-up; }
-    Mod+Shift+L { focus-monitor-right; }
+    Mod+Shift+Up { focus-monitor-up; }
+    Mod+Shift+Down { focus-monitor-down; }
+    //Mod+Shift+H { focus-monitor-left; }
+    //Mod+Shift+J { focus-monitor-down; }
+    //Mod+Shift+K { focus-monitor-up; }
+    //Mod+Shift+L { focus-monitor-right; }
 
-    // 移动列到显示器（带 Shift+Ctrl）
-    Mod+Shift+Ctrl+Left { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+Down { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+Up { move-column-to-monitor-up; }
+    // 移动列到显示器（带 Ctrl+Shift）
+    Mod+Shift+Ctrl+Left hotkey-overlay-title="将列移到左侧显示器" { move-column-to-monitor-left; }
     Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
-    Mod+Shift+Ctrl+H { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+J { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+K { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+L { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+Up { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+Down { move-column-to-monitor-down; }
+    //Mod+Shift+Ctrl+H { move-column-to-monitor-left; }
+    //Mod+Shift+Ctrl+J { move-column-to-monitor-down; }
+    //Mod+Shift+Ctrl+K { move-column-to-monitor-up; }
+    //Mod+Shift+Ctrl+L { move-column-to-monitor-right; }
 
     // -------- 工作区切换与移动 --------
     Mod+1 { focus-workspace 1; }
@@ -276,6 +276,7 @@ binds {
     Mod+Shift+Page_Up { move-workspace-up; }
     Mod+Shift+U { move-workspace-down; }
     Mod+Shift+I { move-workspace-up; }
+
 
     // -------- 硬件控制 --------
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
@@ -330,8 +331,12 @@ binds {
     Print { screenshot show-pointer=false; }
     Ctrl+Print { screenshot-screen show-pointer=false; }
     Alt+Print { screenshot-window; }
+
+    // 屏幕批注工具
+    Mod+D hotkey-overlay-title="启动屏幕批注工具" repeat=false { spawn-sh "pkill -SIGUSR1 wayscriber"; }
 }
 
 // ================ 启动时自动运行的程序 ================
-spawn-at-startup  "noctalia-shell"
-spawn-at-startup  "polkit-gnome-authentication-agent-1"
+spawn-at-startup    "noctalia-shell"
+spawn-at-startup    "polkit-gnome-authentication-agent-1"
+spawn-sh-at-startup "wayscriber --daemon"
