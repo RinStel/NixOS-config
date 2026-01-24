@@ -39,7 +39,7 @@
           "showCpuUsage": true,
           "showDiskUsage": false,
           "showGpuTemp": false,
-          "showLoadAverage": true,
+          "showLoadAverage": false,
           "showMemoryAsPercent": false,
           "showMemoryUsage": true,
           "showNetworkStats": false,
@@ -69,12 +69,12 @@
           "hideMode": "idle",
           "hideWhenIdle": false,
           "id": "MediaMini",
-          "maxWidth": 145,
+          "maxWidth": 155,
           "panelShowAlbumArt": true,
           "panelShowVisualizer": true,
-          "scrollingMode": "hover",
+          "scrollingMode": "always",
           "showAlbumArt": true,
-          "showArtistFirst": true,
+          "showArtistFirst": false,
           "showProgressRing": true,
           "showVisualizer": true,
           "useFixedWidth": false,
@@ -211,7 +211,7 @@
     "settingsPanelMode": "attached",
     "wifiDetailsViewMode": "grid",
     "bluetoothDetailsViewMode": "grid",
-    "networkPanelView": "ethernet",
+    "networkPanelView": "wifi",
     "bluetoothHideUnnamedDevices": false,
     "boxBorderEnabled": false
   },
@@ -489,7 +489,7 @@
       "lowSoundFile": "",
       "excludedApps": "discord,firefox,chrome,chromium,edge"
     },
-    "enableMediaToast": true
+    "enableMediaToast": false
   },
   "osd": {
     "enabled": true,
