@@ -1,3 +1,10 @@
+# --------------------------
+# 请在 /etc/secrets/mihomo-sub.env 中按以下顺序写入环境变量
+# SUB_URL=
+# MIHOMO_CONTROLLER=127.0.0.1:9090
+# MIHOMO_SECRET=
+# --------------------------
+
 { config, pkgs, lib, ... }:
 let
   cfgPath = "/etc/mihomo/config.yaml";
@@ -8,6 +15,10 @@ in
     configFile = cfgPath;
     tunMode = true;
     webui = pkgs.metacubexd;
+  };
+
+  systemd.services.mihomo.environment = {
+    SAFE_PATHS = "/etc/mihomo";
   };
 
   # 确保目录存在（以及权限）
@@ -58,8 +69,10 @@ in
       # 热重载
       curl -fS -X PUT \
         -H "Authorization: Bearer $MIHOMO_SECRET" \
+        -H "Content-Type: application/json" \
         "http://$MIHOMO_CONTROLLER/configs?force=true" \
-        -d "{\"path\":\"${cfgPath}\"}"
+        --data "{\"path\":\"${cfgPath}\"}"
+      exit 0
     '';
   };
 
