@@ -559,6 +559,18 @@
       {
         "enabled": true,
         "id": "niri"
+      },
+      {
+        "enabled": true,
+        "id": "helix"
+      },
+      {
+        "enabled": true,
+        "id": "btop"
+      },
+      {
+        "enabled": true,
+        "id": "hyprtoolkit"
       }
     ],
     "enableUserTheming": false
