@@ -8,11 +8,15 @@ let
     runtimeInputs = [ pkgs.freerdp ];
     text = ''
       set -euo pipefail
-      pass="$(< ${passPath})"
-      printf '%s\n' "$pass" | xfreerdp \
-        /v:192.168.122.129 /u:YSChain@163.com /from-stdin \
+      xfreerdp \
+        /v:192.168.122.129 \
+        /u:YSChain@163.com \
+        /d: \
+        /auth-pkg-list:none,ntlm \
+        /from-stdin:force \
         /w:2880 /h:1800 /scale:180 /scale-device:180 /scale-desktop:180 \
-        /cert:ignore /bpp:32 /gfx:AVC444 +clipboard
+        /cert:ignore /bpp:32 /gfx:AVC444 +clipboard \
+        < "${passPath}"
     '';
   };
 in {
