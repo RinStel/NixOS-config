@@ -22,6 +22,7 @@
 
   environment.systemPackages = with pkgs; [
     # 基础软件包
+    usbutils
     vim
     wget
     git

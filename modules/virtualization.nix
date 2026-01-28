@@ -1,5 +1,5 @@
 # virtualization.nix (unstable, AMD, virtiofs share, PCI passthrough-ready)
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   virtualisation = {
     docker.enable = false;
@@ -25,8 +25,15 @@
         # 共享目录（virtiofs）必需
         vhostUserPackages = with pkgs; [ virtiofsd ];
 
-        # 建议先去掉你原来的 verbatimConfig（避免覆盖模块默认qemu.conf）
-        # verbatimConfig = "";
+        verbatimConfig = ''
+          # 允许 qemu 访问 render node（以及其它默认设备）
+          cgroup_device_acl = [
+            "/dev/null", "/dev/full", "/dev/zero",
+            "/dev/random", "/dev/urandom",
+            "/dev/ptmx", "/dev/kvm",
+            "/dev/dri/renderD128"
+          ]
+        '';
       };
     };
 
@@ -36,17 +43,26 @@
   programs.virt-manager.enable = true;
   programs.dconf.enable = true;
 
-  users.users.zikun.extraGroups = [ "libvirtd" "kvm" "qemu" ];
+  # 将用户添加进组
+  users.users.zikun.extraGroups = lib.mkAfter [ "libvirtd" "kvm" "qemu" "render" "video" ];
+  users.users.qemu-libvirtd.extraGroups = [ "render" "video" ]; # 血的教训
 
   environment.systemPackages = with pkgs; [
-    # 默认 NAT 网络（virbr0）所需
-    dnsmasq
+    # virgl/mesa 运行时
+    mesa
+    virglrenderer
+    spice-gtk
     virt-viewer
+
+    dnsmasq # 默认 NAT 网络（virbr0）所需
     libguestfs
 
-    # 虚拟化容器
-    distrobox
+    distrobox # 虚拟化容器(其实不该放在这个模块)
     xdg-utils
+
+    # RDP
+    freerdp   # 提供 xfreerdp / wlfreerdp 等
+    remmina  # 可选：GUI 客户端
   ];
 
   # PCI passthrough：VFIO 模块放 initrd，保证早于显卡等早期驱动加载
@@ -67,7 +83,7 @@
   # 只保留 AMD 的 KVM 模块（通常也可不写，内核会自动加载）
   boot.kernelModules = [ "kvm-amd" ];
 
-  # NAT + 转发（你要让 Windows 流量跟宿主共网、走 mihomo tun 时通常需要）
+  # NAT + 转发（让 Windows 流量跟宿主共网、走 mihomo tun 时通常需要）
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   networking.firewall.trustedInterfaces = [ "virbr0" ];
   networking.firewall.checkReversePath = false;
