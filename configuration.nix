@@ -26,6 +26,18 @@
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
 
+  # DNS
+  services.resolved = {
+    enable = true;
+    settings.Resolve.DNSOverTLS = "yes";
+  };
+  # 这里的 #dns.alidns.com 用于 TLS SNI/证书名匹配
+  networking.nameservers = [
+    "223.5.5.5#dns.alidns.com"
+    "223.6.6.6#dns.alidns.com"
+  ];
+
+
   # ---------电源管理与省电---------
   services.upower.enable = true;
   services.power-profiles-daemon.enable = true;

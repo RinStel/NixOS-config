@@ -37,9 +37,9 @@
 
     # devShell 统一用的 pkgs
     mkPkgs = system: import nixpkgs { inherit system; };
-    devShellDir = ./devshells;
     system = "x86_64-linux";
     pkgs = mkPkgs system;
+    devShellDir = ./devshells;
   in
   {
     nixosConfigurations.forge = nixpkgs.lib.nixosSystem {
@@ -51,7 +51,7 @@
         nix-flatpak.nixosModules.nix-flatpak
 
         agenix.nixosModules.default
-        ({ pkgs, ... }: {  environment.systemPackages = [ agenix.packages.${pkgs.system}.default ];  })
+        ({ pkgs, ... }: {  environment.systemPackages = [ agenix.packages.${pkgs.stdenv.hostPlatform.system}.default ];  })
 
         inputs.home-manager.nixosModules.home-manager
         {
