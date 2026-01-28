@@ -2,7 +2,6 @@
 
 let
   lockCmd = "${config.home.profileDirectory}/bin/noctalia-shell ipc call lockScreen lock";
-  fcitxReset = "${pkgs.fcitx5}/bin/fcitx5-remote -r";
   dpmsOff = "${pkgs.niri}/bin/niri msg action power-off-monitors";
   dpmsOn  = "${pkgs.niri}/bin/niri msg action power-on-monitors";
 
@@ -104,7 +103,7 @@ in
     enable = true;
     timeouts = [
       # 5 分钟无操作 -> Noctalia 锁定
-      { timeout = 300; command = lockCmd; resumeCommand = fcitxReset; }
+      { timeout = 300; command = lockCmd; }
       # 再过 25 秒无操作 → 熄屏
       { timeout = 325; command = "${dpmsOffIfLocked}"; resumeCommand = "${dpmsOnIfNeeded}"; }
       # 主动锁定的情况
@@ -112,7 +111,7 @@ in
     ];
     events = {
       before-sleep = lockCmd;
-      after-resume = "${dpmsOn}; ${fcitxReset}";
+      after-resume = "${dpmsOn}";
     };
   };
 }

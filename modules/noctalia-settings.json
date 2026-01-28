@@ -216,7 +216,7 @@
     "boxBorderEnabled": false
   },
   "location": {
-    "name": "鄞州区",
+    "name": "余姚市",
     "weatherEnabled": true,
     "weatherShowEffects": true,
     "useFahrenheit": false,
@@ -585,11 +585,11 @@
     "manualSunset": "18:30"
   },
   "hooks": {
-    "enabled": false,
+    "enabled": true,
     "wallpaperChange": "",
     "darkModeChange": "",
     "screenLock": "",
-    "screenUnlock": "",
+    "screenUnlock": "fcitx5-remote -r",
     "performanceModeEnabled": "",
     "performanceModeDisabled": "",
     "session": ""
