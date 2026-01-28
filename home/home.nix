@@ -25,6 +25,12 @@ let
       ${dpmsOn}
     fi
   '';
+
+  configDir = ./modules;
+  generatedModules = lib.map (file: configDir + "/${file}")
+    (lib.filter (file: lib.hasSuffix ".nix" file)
+    (lib.attrNames (builtins.readDir configDir)));
+
 in
 
 {
@@ -32,9 +38,7 @@ in
   home.homeDirectory = "/home/zikun";
   home.stateVersion = "26.05";
 
-  imports = [
-    ./modules/vscode.nix
-  ];
+  imports = generatedModules;
 
   gtk = {
     enable = true;

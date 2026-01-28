@@ -21,9 +21,12 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/latest";
+
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-flatpak, ... }: 
+
+  outputs = inputs@{ self, nixpkgs, nix-flatpak, agenix, ... }: 
   let
     lib = nixpkgs.lib;
 
@@ -45,15 +48,22 @@
       
       modules = [
         ./configuration.nix
-
         nix-flatpak.nixosModules.nix-flatpak
+
+        agenix.nixosModules.default
+        ({ pkgs, ... }: {  environment.systemPackages = [ agenix.packages.${pkgs.system}.default ];  })
 
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "hm-bak";
-          home-manager.users.zikun = import ./home/home.nix;
+          home-manager.users.zikun = { ... }: {
+            imports = [
+              agenix.homeManagerModules.default
+              ./home/home.nix
+            ];
+          };
         }
       ] ++ generatedModules; 
     };
