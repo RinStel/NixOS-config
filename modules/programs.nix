@@ -51,9 +51,16 @@
     lsd
     wireguard-tools
 
+    # 娱乐
+    protonplus
+
     # 开发相关依赖
     nodejs
     pnpm
+
+    # Vibe Coding
+    claude-code
+    spec-kit
 
     # (较)大型第三方软件
     google-chrome
