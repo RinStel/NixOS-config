@@ -46,10 +46,12 @@
     btop
     cmatrix
     #obsidian
-    #yazi
+    yazi
     bat
     lsd
     wireguard-tools
+    sqlitestudio
+    ffmpeg
 
     # 娱乐
     protonplus
