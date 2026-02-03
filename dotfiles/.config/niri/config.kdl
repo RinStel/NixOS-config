@@ -91,7 +91,7 @@ layout {
     // 聚焦高亮环
     focus-ring {
         width 2.0
-        active-color "#FF9F1A"
+        active-color "#EB9115"
         inactive-color "#505050"
     }
 
@@ -109,6 +109,69 @@ layout {
         gaps-between-tabs 3                  // 标签之间间距
     }
 }
+
+// ================ 动画======================
+animations {
+    // Uncomment to turn off all animations.
+    // You can also put "off" into each individual animation to disable it.
+    // off
+
+    // Slow down all animations by this factor. Values below 1 speed them up instead.
+    // slowdown 0.95  // 略微加速
+
+    // 在更改参数时，请保证同一组中的动画参数协调同步
+    // ========== 空间移动 ==========
+    horizontal-view-movement {
+        spring damping-ratio=0.88 stiffness=800 epsilon=0.0001
+    }
+
+    window-movement {
+        spring damping-ratio=0.88 stiffness=800 epsilon=0.0001
+    }
+
+    window-resize {
+        spring damping-ratio=0.88 stiffness=800 epsilon=0.0001
+    }
+
+    // ========== Workspace 相关 ==========
+    workspace-switch {
+        spring damping-ratio=0.95 stiffness=1000 epsilon=0.0001
+    }
+
+    overview-open-close {
+        spring damping-ratio=0.95 stiffness=1000 epsilon=0.0001
+    }
+
+    // ========== 杂项(无需考虑同步) ==========
+    window-open {
+        duration-ms 150
+        curve "ease-out-cubic"
+    }
+
+    window-close {
+        duration-ms 180
+        curve "ease-out-quad"
+    }
+
+    screenshot-ui-open {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+
+    recent-windows-close {
+        duration-ms 160
+        curve "ease-out-quad"
+    }
+
+    config-notification-open-close {
+        spring damping-ratio=0.6 stiffness=900 epsilon=0.001
+    }
+
+    exit-confirmation-open-close {
+        spring damping-ratio=0.6 stiffness=600 epsilon=0.01
+    }
+}
+
 
 // ================ 工作区定义 ================
 workspace "a" { }
@@ -200,11 +263,11 @@ binds {
     Mod+Shift+Slash hotkey-overlay-title="捷键概览" { show-hotkey-overlay; } 
     
     // -------- 焦点移动（HJKL / 方向键） --------
-    // 焦点（禁用重复）
-    Mod+Left hotkey-overlay-title="将焦点移到左侧列" repeat=false { focus-column-left; }
-    Mod+Right repeat=false { focus-column-right; }
-    Mod+Up hotkey-overlay-title="将焦点移到上方(同一列)" repeat=false { focus-window-up; }
-    Mod+Down repeat=false { focus-window-down; }
+    // 焦点（带冷却时间）
+    Mod+Left hotkey-overlay-title="将焦点移到左侧列" cooldown-ms=150 { focus-column-left; }
+    Mod+Right cooldown-ms=150 { focus-column-right; }
+    Mod+Up hotkey-overlay-title="将焦点移到上方(同一列)" cooldown-ms=150 { focus-window-up; }
+    Mod+Down cooldown-ms=150 { focus-window-down; }
     //Mod+H repeat=false { focus-column-left; }
     //Mod+J repeat=false { focus-window-down; }
     //Mod+K repeat=false { focus-window-up; }
@@ -337,6 +400,9 @@ binds {
     Print { screenshot show-pointer=false; }
     Ctrl+Print { screenshot-screen show-pointer=false; }
     Alt+Print { screenshot-window; }
+
+    // 熄屏
+    Mod+Shift+P { power-off-monitors; }
 
     // 屏幕批注工具
     Mod+D hotkey-overlay-title="启动屏幕批注工具" repeat=false { spawn-sh "pkill -SIGUSR1 wayscriber"; }
