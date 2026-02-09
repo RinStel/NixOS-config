@@ -175,6 +175,21 @@
     KERNEL=="ttyACM*", MODE="0666"
   '';
 
+  # 尽量修复字体模糊
+  fonts.fontconfig = {
+    enable = true;
+    antialias = true;
+  
+    hinting = {
+      enable = true;
+      style = "full";
+    };
+  
+    subpixel = {
+      rgba = "none";       # 如果出现彩边/更虚，尝试 "rgb" 或 "bgr"
+      lcdfilter = "default";
+    };
+  };
 
 
   services.logind.settings.Login = {
