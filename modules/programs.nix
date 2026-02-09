@@ -36,7 +36,7 @@
     zip    
     unzip
     mpv
-    nautilus # 文件选择器
+    iputils
 
     # 工具类
     mangohud  # 用于监视应用的GPU占用和帧率
@@ -51,6 +51,7 @@
     wireguard-tools
     sqlitestudio
     ffmpeg
+    nautilus # 文件选择器
 
     # 娱乐
     protonplus

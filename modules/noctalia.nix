@@ -48,25 +48,49 @@
     programs.noctalia-shell = {
       enable = true;
 
-      # 警告：这会导致无法手动安装插件
       plugins = {
-        version = 1;
+          version = 2;
 
-        sources = [
-          {
-            enabled = true;
-            name = "Official Noctalia Plugins";
-            url = "https://github.com/noctalia-dev/noctalia-plugins";
-          }
-        ];
+          sources = [
+            {
+              enabled = true;
+              name = "Noctalia Plugins (Registry)";
+              url = "https://github.com/noctalia-dev/noctalia-plugins";
+            }
+          ];
 
-        states = {
-          screen-recorder = {
-            enabled = true;
-            sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+          states = {
+            # Screen Recorder (官方)
+            screen-recorder = {
+              enabled = true;
+              sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+            };
+
+            # Translator
+            translator = {
+              enabled = true;
+              sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+            };
+
+            # Privacy Indicator (官方)
+            privacy-indicator = {
+              enabled = true;
+              sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+            };
+
+            # SuperGFX Control（仓库目录名是 noctalia-supergfxctl）
+            noctalia-supergfxctl = {
+              enabled = true;
+              sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+            };
+
+            # Network Indicator
+            network-indicator = {
+              enabled = true;
+              sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+            };
           };
         };
-      };
     };
 
     # 把“种子配置”放到 XDG 里

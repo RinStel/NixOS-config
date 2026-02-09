@@ -56,7 +56,7 @@ in
   home.file.".vimrc".source = ../dotfiles/.vimrc;
 
   xdg.enable = true;
-  xdg.configFile."btop".source = ../dotfiles/.config/btop;
+  #xdg.configFile."btop".source = ../dotfiles/.config/btop;
   xdg.configFile."fastfetch".source = ../dotfiles/.config/fastfetch;
 
   # --- 下面这部分对 Noctalia 的主题联动做了适配 ---
