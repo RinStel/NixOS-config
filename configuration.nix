@@ -188,7 +188,7 @@
   
     hinting = {
       enable = true;
-      style = "medium";
+      style = "slight";
       autohint = true;
     };
   
