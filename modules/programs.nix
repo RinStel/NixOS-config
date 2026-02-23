@@ -55,6 +55,7 @@
 
     # 娱乐
     protonplus
+    kodi
 
     # 开发相关依赖
     nodejs
@@ -69,7 +70,7 @@
     spotify
     telegram-desktop
     wechat-uos
-    onlyoffice-desktopeditors
+    libreoffice-qt
     typora
   ];
 

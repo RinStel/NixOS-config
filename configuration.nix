@@ -10,6 +10,11 @@
       ./hardware-configuration.nix
     ];
 
+  nixpkgs.overlays = [
+    # 在此添加overlay
+  ];
+
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -22,6 +27,7 @@
   hardware.bluetooth.enable = true;
 
   # Configure network proxy if necessary
+  networking.enableIPv6 = false;  # 禁用IPv6以避免某些神秘问题
   networking.proxy.default = "http://127.0.0.1:7890/";
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
@@ -182,7 +188,8 @@
   
     hinting = {
       enable = true;
-      style = "full";
+      style = "medium";
+      autohint = true;
     };
   
     subpixel = {
@@ -216,6 +223,12 @@
     [system_default_sect]
     CipherString = Default:@SECLEVEL=0
   '';
+
+  # 修复：字体解析异常
+  environment.sessionVariables = {
+    FONTCONFIG_FILE = "/etc/fonts/fonts.conf";
+    FONTCONFIG_PATH = "/etc/fonts";
+  };
 
 
   # Enable the OpenSSH daemon.

@@ -227,7 +227,7 @@ output "eDP-1" {
 }
 
 output "HDMI-A-1" {
-    mode  "2560x1440@144.000"
+    mode  "2560x1440@119.998"
     scale 1               // 100%缩放
     variable-refresh-rate //on-demand=true
 
@@ -236,7 +236,7 @@ output "HDMI-A-1" {
 }
 
 output "HDMI-A-2" {
-    mode  "2560x1440@144.000"
+    mode  "2560x1440@119.998"
     scale 1               // 100%缩放
     variable-refresh-rate //on-demand=true
 

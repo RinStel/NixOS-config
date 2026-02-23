@@ -32,18 +32,31 @@
 
   # 中文字体优化
   fonts = {
-  packages = with pkgs; [
-    cascadia-code
-    noto-fonts 
-    noto-fonts-cjk-sans    # 思源黑体 (无衬线)
-    noto-fonts-cjk-serif   # 思源宋体 (衬线)
+    enableDefaultPackages = true;
+    fontDir.enable = true;          # 生成字体目录（对部分应用更友好）
+    fontconfig.enable = true;
+
+    packages = with pkgs; [
+      cascadia-code
+      noto-fonts 
+      noto-fonts-cjk-sans    # 思源黑体 (无衬线)
+      noto-fonts-cjk-serif   # 思源宋体 (衬线)
+      noto-fonts-color-emoji
+
+      source-han-sans
+      source-han-serif
+      sarasa-gothic
+      wqy_microhei
+      wqy_zenhei
+      liberation_ttf
+      dejavu_fonts
+      corefonts
     ];
-  fontconfig = {
-    defaultFonts = {
+
+    fontconfig.defaultFonts = {
       sansSerif = [ "Noto Sans CJK SC" ];
-      serif = [ "Noto Serif CJK SC" ];
-    #  monospace = [ "Noto Sans Mono CJK SC" ];
-     };
-   };
- };
+      serif     = [ "Noto Serif CJK SC" ];
+      #monospace = [ "Noto Sans Mono CJK SC" ];
+    };
+  };
 }
