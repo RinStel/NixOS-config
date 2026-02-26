@@ -48,6 +48,11 @@ in
       enable = true;
       colorScheme = "dark";
     };
+
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
   };
   
   programs.home-manager.enable = true;

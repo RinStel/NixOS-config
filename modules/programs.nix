@@ -11,12 +11,6 @@
 
   services.gnome.gnome-keyring.enable = true;
 
-  programs.thunar.enable = true;
-  programs.thunar.plugins = with pkgs; [
-    thunar-volman
-    thunar-archive-plugin
-    thunar-media-tags-plugin
-  ];
   services.gvfs.enable = true;
   services.tumbler.enable = true;
 
@@ -37,6 +31,7 @@
     unzip
     mpv
     iputils
+    lsof
 
     # 工具类
     mangohud  # 用于监视应用的GPU占用和帧率
@@ -51,7 +46,8 @@
     wireguard-tools
     sqlitestudio
     ffmpeg
-    nautilus # 文件选择器
+    nemo
+    nemo-fileroller  # nemo 压缩包处理插件
 
     # 娱乐
     protonplus
@@ -72,6 +68,7 @@
     wechat-uos
     libreoffice-qt
     typora
+    obsidian
   ];
 
   services.flatpak = {
