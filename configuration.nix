@@ -153,6 +153,17 @@
     gst_all_1.gst-plugins-ugly
   ];
 
+  # 自动垃圾清理
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+  nix.optimise.automatic = true;
+
+
+  # ----------以下是一些系统级的修补------------
+
   # Attention this
   environment.pathsToLink = [
     "/share/fastfetch"
@@ -214,13 +225,15 @@
   # 修复：无法连接不遵循规范的的WPA2企业网络
   systemd.services.wpa_supplicant.environment.OPENSSL_CONF = pkgs.writeText "openssl.cnf" ''
     openssl_conf = openssl_init
+
     [openssl_init]
     ssl_conf = ssl_sect
+
     [ssl_sect]
     system_default = system_default_sect
+
     [system_default_sect]
     Options = UnsafeLegacyRenegotiation
-    [system_default_sect]
     CipherString = Default:@SECLEVEL=0
   '';
 
