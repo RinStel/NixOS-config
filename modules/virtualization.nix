@@ -88,5 +88,22 @@
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
   networking.firewall.trustedInterfaces = [ "virbr0" ];
   networking.firewall.checkReversePath = false;
-}
 
+  # (临时修复) 覆盖 libvirt 自带的坏 unit：上游硬编码了 /usr/bin/sh，NixOS 上不存在
+  systemd.services.virt-secret-init-encryption = {
+    description = "Initialize libvirt secret encryption key";
+
+    before = [ "virtsecretd.service" "libvirtd.service" ];
+
+    unitConfig.ConditionPathExists =
+      "!/var/lib/libvirt/secrets/secrets-encryption-key";
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = lib.mkForce [
+        ""
+        "${pkgs.runtimeShell} -c 'umask 0077 && (dd if=/dev/random status=none bs=32 count=1 | ${pkgs.systemd}/bin/systemd-creds encrypt --name=secrets-encryption-key - /var/lib/libvirt/secrets/secrets-encryption-key)'"
+      ];
+    };
+  };
+}

@@ -68,8 +68,8 @@
   # 镜像源配置
   nix.settings = {
     substituters = [
-      "https://mirrors.ustc.edu.cn/nix-channels/store?priority=10"
-      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=5"
+      "https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://cache.nixos.org/"
     ];
     # 增加下载缓冲区大小
