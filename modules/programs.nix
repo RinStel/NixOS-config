@@ -32,6 +32,7 @@
     mpv
     iputils
     lsof
+    ripgrep
 
     # 工具类
     mangohud  # 用于监视应用的GPU占用和帧率
@@ -51,11 +52,12 @@
 
     # 娱乐
     protonplus
-    kodi
+    tsukimi  # emby
 
     # 开发相关依赖
     nodejs
     pnpm
+    conda
 
     # Vibe Coding
     claude-code
@@ -69,6 +71,7 @@
     libreoffice-qt
     typora
     obsidian
+    netease-cloud-music-gtk
   ];
 
   services.flatpak = {

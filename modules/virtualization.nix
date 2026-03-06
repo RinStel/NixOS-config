@@ -58,6 +58,7 @@
     libguestfs
 
     distrobox # 虚拟化容器(其实不该放在这个模块)
+    podman-compose # 用于compose
     xdg-utils
 
     # RDP

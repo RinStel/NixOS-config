@@ -253,7 +253,7 @@ binds {
     // -------- 启动器与系统应用 --------
     Mod+T hotkey-overlay-title="打开终端 (Kitty)" { spawn "kitty"; }
     Mod+B hotkey-overlay-title="打开 Chrome" { spawn "google-chrome-stable"; }
-    Mod+N hotkey-overlay-title="打开文件浏览器 thunar" { spawn "thunar"; }
+    Mod+N hotkey-overlay-title="打开文件浏览器 Nemo" { spawn "nemo"; }
 
     // -------- Noctalia 特有绑定 --------
     Mod+S hotkey-overlay-title="控制面板" { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
