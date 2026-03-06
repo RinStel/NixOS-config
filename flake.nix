@@ -23,6 +23,9 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/latest";
 
     agenix.url = "github:ryantm/agenix";
+
+    codex.url = "github:openai/codex";
+    codex.inputs.nixpkgs.follows = "nixpkgs";
   };
 
 
@@ -42,16 +45,24 @@
     devShellDir = ./devshells;
   in
   {
+    # 手动打包内容
+    # ...
+
+    # 系统配置
     nixosConfigurations.forge = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit inputs self; };
       
       modules = [
         ./configuration.nix
         nix-flatpak.nixosModules.nix-flatpak
 
         agenix.nixosModules.default
-        ({ pkgs, ... }: {  environment.systemPackages = [ agenix.packages.${pkgs.stdenv.hostPlatform.system}.default ];  })
+        ({ pkgs, ... }: {
+          environment.systemPackages = [
+            agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
+          ];
+        })
 
         inputs.home-manager.nixosModules.home-manager
         {
@@ -70,10 +81,6 @@
 
     devShells.${system} = {
       default = import (devShellDir + "/python.nix") { inherit pkgs; };
-
-      # 示例：你可以按项目类型加更多
-      #py-min = import (devShellDir + "/py-min.nix") { inherit pkgs; };
-      #py-c-ext = import (devShellDir + "/py-c-ext.nix") { inherit pkgs; };
     };
   };
 }
