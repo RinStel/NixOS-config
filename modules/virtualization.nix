@@ -2,11 +2,8 @@
 { pkgs, lib, ... }:
 {
   virtualisation = {
-    docker.enable = false;
-    podman = {
+    docker = {
       enable = true;
-      dockerCompat = true;   # 让 docker 命令也能跑
-      defaultNetwork.settings.dns_enabled = true;
     };
 
     libvirtd = {
@@ -44,7 +41,7 @@
   programs.dconf.enable = true;
 
   # 将用户添加进组
-  users.users.zikun.extraGroups = lib.mkAfter [ "libvirtd" "kvm" "qemu" "render" "video" ];
+  users.users.zikun.extraGroups = lib.mkAfter [ "docker" "libvirtd" "kvm" "qemu" "render" "video" ];
   users.users.qemu-libvirtd.extraGroups = [ "render" "video" ]; # 血的教训
 
   environment.systemPackages = with pkgs; [
@@ -58,7 +55,7 @@
     libguestfs
 
     distrobox # 虚拟化容器(其实不该放在这个模块)
-    podman-compose # 用于compose
+    docker-compose # 用于compose
     xdg-utils
 
     # RDP
