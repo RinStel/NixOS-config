@@ -21,6 +21,8 @@
 
   boot.supportedFilesystems = [ "ntfs" ];
 
+
+  # ----------- 网络与连接 -------------
   networking.hostName = "forge"; # Define your hostname.
   networking.networkmanager.enable = true;
   networking.wireless.enable = true;
@@ -31,6 +33,10 @@
   networking.proxy.default = "http://127.0.0.1:7890/";
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [ 10003 ];  # Important: 指定放行端口
+  };
 
   # DNS
   services.resolved = {
