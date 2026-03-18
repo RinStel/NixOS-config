@@ -16,6 +16,7 @@
 
 
   # Bootloader.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -35,7 +36,9 @@
 
   networking.firewall = {
     enable = true;
-    allowedUDPPorts = [ 10003 ];  # Important: 指定放行端口
+
+    trustedInterfaces = [ "eno1" ]; # 没事就别tm瞎开防火墙
+    allowedUDPPorts = [ 10003 ];    # 保命: 指定放行端口
   };
 
   # DNS
@@ -213,16 +216,6 @@
       rgba = "none";       # 如果出现彩边/更虚，尝试 "rgb" 或 "bgr"
       lcdfilter = "default";
     };
-  };
-
-
-  services.logind.settings.Login = {
-    # 合盖时挂起
-    HandleLidSwitch = "suspend";
-    # 接外接电源时合盖挂起（可按需改成 "ignore"/"lock", 但lock有信号传递上的问题）
-    HandleLidSwitchExternalPower = "suspend";
-    # 外接显示器/“docked”状态下的合盖行为
-    HandleLidSwitchDocked = "suspend";
   };
 
   # 解决切换到Windows系统后时间异常的问题
