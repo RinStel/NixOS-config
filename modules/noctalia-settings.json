@@ -750,10 +750,10 @@
     "lockTimeout": 360,
     "suspendTimeout": 1800,
     "fadeDuration": 10,
-    "screenOffCommand": "",
+    "screenOffCommand": "/run/current-system/sw/bin/niri msg action power-off-monitors",
     "lockCommand": "",
     "suspendCommand": "",
-    "resumeScreenOffCommand": "",
+    "resumeScreenOffCommand": "/run/current-system/sw/bin/niri msg action power-on-monitors",
     "resumeLockCommand": "",
     "resumeSuspendCommand": "",
     "customCommands": "[]"

@@ -53,6 +53,8 @@
     # 娱乐
     protonplus
     tsukimi  # emby
+    #prismlauncher  # MC
+    hmcl
 
     # 开发相关依赖
     nodejs
@@ -73,6 +75,9 @@
     obsidian
     netease-cloud-music-gtk
   ];
+
+  # ToDesk
+  #services.todesk.enable = true;
 
   services.flatpak = {
     enable = true;

@@ -214,6 +214,13 @@ window-rule {
     open-maximized true
 }
 
+// lumina
+window-rule {
+    match app-id=r#"^com\.ausksyc@outlook\.Client$"#
+    match title="Lumina RoboCup Client"
+    open-maximized true
+}
+
 
 // ================ 显示输出配置 ================
 output "eDP-1" {
