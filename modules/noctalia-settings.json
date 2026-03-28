@@ -15,7 +15,6 @@
     "enableExclusionZoneInset": true,
     "backgroundOpacity": 0.55,
     "useSeparateOpacity": true,
-    "floating": true,
     "marginVertical": 1,
     "marginHorizontal": 2,
     "frameThickness": 8,
@@ -40,7 +39,7 @@
         {
           "clockColor": "primary",
           "customFont": "",
-          "formatHorizontal": "HH:mm:ss ddd, MMM dd",
+          "formatHorizontal": "HH:mm:ss ddd, MMM dd日",
           "formatVertical": "HH mm ss - dd MM",
           "id": "Clock",
           "tooltipFormat": "HH:mm:ss ddd, MMM dd",
@@ -282,7 +281,8 @@
         "Del"
       ]
     },
-    "reverseScroll": false
+    "reverseScroll": false,
+    "smoothScrollEnabled": true
   },
   "ui": {
     "fontDefault": "Sans Serif",
@@ -357,6 +357,7 @@
     "transitionEdgeSmoothness": 0.1,
     "panelPosition": "follow_bar",
     "hideWallpaperFilenames": true,
+    "useOriginalImages": true,
     "overviewBlur": 0.4,
     "overviewTint": 0.6,
     "useWallhaven": false,
@@ -421,17 +422,27 @@
       "right": [
         {
           "defaultSettings": {
-            "debug": false,
-            "rogcc": {
-              "listenToNotifications": false
-            },
-            "supergfxctl": {
-              "patchPending": true,
-              "polling": false,
-              "pollingInterval": 3000
-            }
+            "audioCodec": "opus",
+            "audioSource": "default_output",
+            "colorRange": "limited",
+            "copyToClipboard": false,
+            "customReplayDuration": "30",
+            "directory": "",
+            "filenamePattern": "recording_yyyyMMdd_HHmmss",
+            "frameRate": "60",
+            "hideInactive": false,
+            "iconColor": "none",
+            "quality": "very_high",
+            "replayDuration": "30",
+            "replayEnabled": false,
+            "replayStorage": "ram",
+            "resolution": "original",
+            "restorePortalSession": false,
+            "showCursor": true,
+            "videoCodec": "h264",
+            "videoSource": "portal"
           },
-          "id": "plugin:noctalia-supergfxctl"
+          "id": "plugin:screen-recorder"
         },
         {
           "id": "WallpaperSelector"
@@ -500,7 +511,7 @@
     "position": "bottom",
     "displayMode": "auto_hide",
     "dockType": "floating",
-    "backgroundOpacity": 0.75,
+    "backgroundOpacity": 0.8,
     "floatingRatio": 1,
     "size": 1,
     "onlySameOutput": true,
@@ -521,13 +532,12 @@
     "deadOpacity": 0.6,
     "animationSpeed": 1,
     "sitOnFrame": false,
-    "showDockIndicator": false,
-    "indicatorThickness": 3,
+    "showDockIndicator": true,
+    "indicatorThickness": 6,
     "indicatorColor": "primary",
     "indicatorOpacity": 0.6
   },
   "network": {
-    "wifiEnabled": true,
     "airplaneModeEnabled": false,
     "bluetoothRssiPollingEnabled": false,
     "bluetoothRssiPollIntervalMs": 10000,
@@ -657,6 +667,7 @@
     "volumeOverdrive": false,
     "spectrumFrameRate": 30,
     "visualizerType": "linear",
+    "spectrumMirrored": true,
     "mprisBlacklist": [],
     "preferredPlayer": "spotify",
     "volumeFeedback": true,
@@ -676,7 +687,8 @@
     "manualSunrise": "06:30",
     "manualSunset": "18:30",
     "generationMethod": "rainbow",
-    "monitorForColors": "eDP-1"
+    "monitorForColors": "eDP-1",
+    "syncGsettings": true
   },
   "templates": {
     "activeTemplates": [
@@ -746,14 +758,14 @@
   },
   "idle": {
     "enabled": true,
-    "screenOffTimeout": 300,
-    "lockTimeout": 360,
+    "screenOffTimeout": 315,
+    "lockTimeout": 355,
     "suspendTimeout": 1800,
-    "fadeDuration": 10,
-    "screenOffCommand": "/run/current-system/sw/bin/niri msg action power-off-monitors",
+    "fadeDuration": 30,
+    "screenOffCommand": "",
     "lockCommand": "",
     "suspendCommand": "",
-    "resumeScreenOffCommand": "/run/current-system/sw/bin/niri msg action power-on-monitors",
+    "resumeScreenOffCommand": "",
     "resumeLockCommand": "",
     "resumeSuspendCommand": "",
     "customCommands": "[]"

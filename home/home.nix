@@ -35,9 +35,57 @@ in
   home.file.".inputrc".source = ../dotfiles/.inputrc;
   home.file.".vimrc".source = ../dotfiles/.vimrc;
 
+  home.sessionVariables = {
+    GO111MODULE = "on";
+    GOPROXY = "https://goproxy.cn,direct";
+  };
+
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
+
   xdg.enable = true;
   #xdg.configFile."btop".source = ../dotfiles/.config/btop;
   xdg.configFile."fastfetch".source = ../dotfiles/.config/fastfetch;
+
+  programs.zsh = {
+    enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    historySubstringSearch.enable = true;
+
+    history = {
+      path = "${config.xdg.stateHome}/zsh/history";
+      size = 10000;
+      save = 10000;
+      ignoreAllDups = true;
+      saveNoDups = true;
+      extended = true;
+      share = true;
+      ignoreSpace = true;
+    };
+
+    completionInit = ''
+      autoload -U compinit
+      mkdir -p "${config.xdg.cacheHome}/zsh"
+      compinit -d "${config.xdg.cacheHome}/zsh/zcompdump-$ZSH_VERSION"
+    '';
+
+    initContent = lib.mkMerge [
+      (lib.mkOrder 1200 ''
+        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}'
+
+        autoload -Uz add-zsh-hook
+      '')
+
+      # Reuse the interactive shell customizations kept in ~/.bashrc.
+      (lib.mkOrder 1300 ''
+        [[ -r "$HOME/.bashrc" ]] && source "$HOME/.bashrc"
+      '')
+    ];
+  };
 
   # --- 下面这部分对 Noctalia 的主题联动做了适配 ---
   xdg.configFile."kitty/kitty.conf".source = ../dotfiles/.config/kitty/kitty.conf;

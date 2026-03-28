@@ -60,7 +60,7 @@
   # NixOS 自带电源管理基线 + powertop 自动调优
   powerManagement.enable = true;
   # 注意：powertop会自动挂起外部设备，可能会导致断开连接
-  #powerManagement.powertop.enable = true;
+  powerManagement.powertop.enable = false;
 
   # CPU 调速策略
   powerManagement.cpuFreqGovernor = "ondemand"; # 或 "powersave"
@@ -102,7 +102,7 @@
 
 
   # 为gnome视频软件使用openGl
-    environment.sessionVariables = {
+  environment.sessionVariables = {
     GDK_GL = "gles";
     };
 
@@ -130,6 +130,7 @@
   users.users.zikun = {
     isNormalUser = true;
     description = "zikun";
+    shell = pkgs.zsh;
     extraGroups = [
       "networkmanager" "wheel" "video" "input"
       "dialout"   # /dev/ttyUSB*, /dev/ttyACM*
@@ -143,6 +144,8 @@
   nixpkgs.config = {
     allowUnfree = true;  # Allow unfree packages
   };
+
+  programs.zsh.enable = true;
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -219,7 +222,7 @@
   };
 
   # 解决切换到Windows系统后时间异常的问题
-  time.hardwareClockInLocalTime = true;
+  time.hardwareClockInLocalTime = false; # 暂时禁用
 
   # 修复：无法连接不遵循规范的的WPA2企业网络
   systemd.services.wpa_supplicant.environment.OPENSSL_CONF = pkgs.writeText "openssl.cnf" ''
