@@ -33,6 +33,7 @@
     iputils
     lsof
     ripgrep
+    smartmontools # 硬盘监控
 
     # 工具类
     mangohud  # 用于监视应用的GPU占用和帧率
@@ -52,6 +53,7 @@
 
     # 娱乐
     protonplus
+    mpvpaper
     tsukimi  # emby
     #prismlauncher  # MC
     hmcl

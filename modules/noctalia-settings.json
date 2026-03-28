@@ -195,8 +195,7 @@
           "showPowerProfiles": true
         },
         {
-          "iconColor": "none",
-          "id": "WallpaperSelector"
+          "id": "plugin:mpvpaper"
         },
         {
           "colorizeDistroLogo": false,
@@ -550,7 +549,7 @@
   },
   "sessionMenu": {
     "enableCountdown": true,
-    "countdownDuration": 6000,
+    "countdownDuration": 5000,
     "position": "center",
     "showHeader": true,
     "showKeybinds": true,
@@ -649,9 +648,9 @@
   "osd": {
     "enabled": true,
     "location": "top_right",
-    "autoHideMs": 2000,
+    "autoHideMs": 2500,
     "overlayLayer": true,
-    "backgroundOpacity": 0.7,
+    "backgroundOpacity": 0.66,
     "enabledTypes": [
       0,
       1,
@@ -727,6 +726,10 @@
       {
         "enabled": true,
         "id": "telegram"
+      },
+      {
+        "enabled": true,
+        "id": "steam"
       }
     ],
     "enableUserTheming": false
