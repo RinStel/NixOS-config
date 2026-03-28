@@ -97,7 +97,7 @@
     uninstallUnmanaged = true;
 
     # 激活时更新（默认 false）
-    update.onActivation = true;
+    update.onActivation = false;
 
     # 定时自动更新（系统激活时也会触发）
     update.auto = {
@@ -111,13 +111,5 @@
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remoteplay
     dedicatedServer.openFirewall = true; # Open ports in the firewall for steam server
-  };
-
-
-# 启用 libvirt 服务
-  virtualisation.libvirtd = {
-    enable = true;
-   # 启用 virtiofsd 支持，这会自动处理 qemu 依赖
-    qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
   };
 }

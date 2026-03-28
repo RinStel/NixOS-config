@@ -3,6 +3,7 @@
 {
   # 启用 NVIDIA 驱动
   hardware.graphics.enable = true;
+  /* Warning: 暂时禁用
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
@@ -18,7 +19,6 @@
 
   hardware.nvidia-container-toolkit.enable = true;
 
-  /*
   # CUDA 部分
   environment.systemPackages = with pkgs; [
     cudatoolkit
