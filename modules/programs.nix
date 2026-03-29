@@ -1,22 +1,83 @@
 { config, pkgs, ... }:
 
 {
-  #programs.firefox.enable = true;
+  programs.direnv.enable = true;
 
+  # Install firefox.
+  #programs.firefox.enable = true;
+  
+# 启用 virt-manager 程序
   programs.virt-manager.enable = true;
+
   services.gnome.gnome-keyring.enable = true;
+
   services.gvfs.enable = true;
   services.tumbler.enable = true;
 
   environment.systemPackages = with pkgs; [
-    # 运维与诊断命令
-    fastfetch
+    # 基础软件包
     usbutils
+    vim
+    wget
+    git
+    starship
+    kitty
+    fastfetch
+    playerctl
+    nerd-fonts.jetbrains-mono
+    libsecret
+    seahorse
+    zip    
+    unzip
+    mpv
     iputils
     lsof
-    smartmontools
-    starship
+    ripgrep
+    smartmontools # 硬盘监控
+
+    # 工具类
+    mangohud  # 用于监视应用的GPU占用和帧率
+    gamescope # 游戏兼容性
+    wayscriber # 屏幕批注工具
+    btop
+    cmatrix
+    #obsidian
+    yazi
+    bat
+    lsd
     wireguard-tools
+    sqlitestudio
+    ffmpeg
+    nemo
+    nemo-fileroller  # nemo 压缩包处理插件
+    steamcmd  # steam workshop下载工具
+
+    # 娱乐
+    protonplus
+    mpvpaper # 壁纸
+    linux-wallpaperengine # 壁纸
+    tsukimi  # emby
+    #prismlauncher  # MC
+    hmcl
+
+    # 开发相关依赖
+    nodejs
+    pnpm
+    conda
+
+    # Vibe Coding
+    claude-code
+    spec-kit
+
+    # (较)大型第三方软件
+    google-chrome
+    spotify
+    telegram-desktop
+    wechat-uos
+    libreoffice-qt
+    typora
+    obsidian
+    netease-cloud-music-gtk
   ];
 
   # ToDesk
