@@ -76,6 +76,9 @@
           "unreadBadgeColor": "primary"
         },
         {
+          "id": "plugin:clipper"
+        },
+        {
           "colorizeIcons": false,
           "hideMode": "hidden",
           "id": "ActiveWindow",
@@ -195,7 +198,7 @@
           "showPowerProfiles": true
         },
         {
-          "id": "plugin:clipper"
+          "id": "plugin:mpvpaper"
         },
         {
           "colorizeDistroLogo": false,
@@ -205,16 +208,13 @@
           "icon": "noctalia",
           "id": "ControlCenter",
           "useDistroLogo": true
-        },
-        {
-          "id": "plugin:mpvpaper"
         }
       ]
     },
     "mouseWheelAction": "workspace",
     "reverseScroll": false,
     "mouseWheelWrap": false,
-    "middleClickAction": "none",
+    "middleClickAction": "launcherPanel",
     "middleClickFollowMouse": false,
     "middleClickCommand": "",
     "rightClickAction": "controlCenter",
@@ -332,7 +332,7 @@
   },
   "wallpaper": {
     "enabled": true,
-    "overviewEnabled": false,
+    "overviewEnabled": true,
     "directory": "/home/zikun/Pictures/Wallpapers",
     "monitorDirectories": [],
     "enableMultiMonitorDirectories": false,
@@ -356,12 +356,12 @@
       "honeycomb"
     ],
     "skipStartupTransition": false,
-    "transitionEdgeSmoothness": 0.1,
+    "transitionEdgeSmoothness": 0.17,
     "panelPosition": "follow_bar",
     "hideWallpaperFilenames": true,
     "useOriginalImages": true,
-    "overviewBlur": 0.4,
-    "overviewTint": 0.6,
+    "overviewBlur": 0.3,
+    "overviewTint": 0.5,
     "useWallhaven": false,
     "wallhavenQuery": "",
     "wallhavenSorting": "relevance",
@@ -777,10 +777,59 @@
     "customCommands": "[]"
   },
   "desktopWidgets": {
-    "enabled": false,
+    "enabled": true,
     "overviewEnabled": true,
     "gridSnap": false,
     "gridSnapScale": false,
-    "monitorWidgets": []
+    "monitorWidgets": [
+      {
+        "name": "eDP-1",
+        "widgets": [
+          {
+            "clockColor": "tertiary",
+            "clockStyle": "binary",
+            "customFont": "",
+            "format": "HH:mm\\nd MMMM yyyy",
+            "id": "Clock",
+            "roundedCorners": true,
+            "scale": 1.5939881104357931,
+            "showBackground": false,
+            "useCustomFont": false,
+            "x": -19,
+            "y": -3
+          },
+          {
+            "id": "Weather",
+            "roundedCorners": true,
+            "scale": 1.930526744106766,
+            "showBackground": false,
+            "x": 561,
+            "y": 44
+          },
+          {
+            "diskPath": "/",
+            "id": "SystemStat",
+            "layout": "bottom",
+            "roundedCorners": true,
+            "scale": 1.4421811233498063,
+            "showBackground": false,
+            "statType": "CPU",
+            "x": -1,
+            "y": 380
+          },
+          {
+            "diskPath": "/",
+            "id": "SystemStat",
+            "layout": "bottom",
+            "roundedCorners": true,
+            "scale": 1.4553657185406805,
+            "showBackground": false,
+            "statType": "Memory",
+            "x": -3,
+            "y": 700
+          }
+        ]
+      }
+    ]
   }
 }

@@ -68,6 +68,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = { inherit inputs self; };
           home-manager.backupFileExtension = "hm-bak";
           home-manager.users.zikun = { ... }: {
             imports = [
