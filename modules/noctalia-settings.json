@@ -195,7 +195,7 @@
           "showPowerProfiles": true
         },
         {
-          "id": "plugin:mpvpaper"
+          "id": "plugin:clipper"
         },
         {
           "colorizeDistroLogo": false,
@@ -205,6 +205,9 @@
           "icon": "noctalia",
           "id": "ControlCenter",
           "useDistroLogo": true
+        },
+        {
+          "id": "plugin:mpvpaper"
         }
       ]
     },

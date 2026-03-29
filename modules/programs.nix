@@ -50,10 +50,12 @@
     ffmpeg
     nemo
     nemo-fileroller  # nemo 压缩包处理插件
+    steamcmd  # steam workshop下载工具
 
     # 娱乐
     protonplus
-    mpvpaper
+    mpvpaper # 壁纸
+    linux-wallpaperengine # 壁纸
     tsukimi  # emby
     #prismlauncher  # MC
     hmcl
