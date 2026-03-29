@@ -313,7 +313,7 @@
     "settingsPanelSideBarCardStyle": false
   },
   "location": {
-    "name": "余姚市",
+    "name": "鄞州区",
     "weatherEnabled": true,
     "weatherShowEffects": true,
     "useFahrenheit": false,
@@ -434,6 +434,9 @@
         }
       ],
       "right": [
+        {
+          "id": "NoctaliaPerformance"
+        },
         {
           "defaultSettings": {
             "audioCodec": "opus",
@@ -617,15 +620,15 @@
         "action": "userspaceReboot",
         "command": "",
         "countdownEnabled": true,
-        "enabled": true,
-        "keybind": "7"
+        "enabled": false,
+        "keybind": ""
       },
       {
         "action": "rebootToUefi",
         "command": "",
         "countdownEnabled": true,
         "enabled": true,
-        "keybind": "8"
+        "keybind": "7"
       }
     ]
   },
@@ -807,8 +810,8 @@
             "scale": 1.5939881104357931,
             "showBackground": false,
             "useCustomFont": false,
-            "x": -19,
-            "y": -3
+            "x": -14,
+            "y": 6
           },
           {
             "id": "Weather",
@@ -826,8 +829,8 @@
             "scale": 1.4421811233498063,
             "showBackground": false,
             "statType": "CPU",
-            "x": -1,
-            "y": 380
+            "x": 1,
+            "y": 327
           },
           {
             "diskPath": "/",
@@ -837,8 +840,8 @@
             "scale": 1.4553657185406805,
             "showBackground": false,
             "statType": "Memory",
-            "x": -3,
-            "y": 700
+            "x": -1,
+            "y": 596
           }
         ]
       }
