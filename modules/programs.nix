@@ -66,7 +66,8 @@
     conda
 
     # Vibe Coding
-    claude-code
+    #claude-code 暂时禁用
+    codex
     spec-kit
 
     # (较)大型第三方软件
