@@ -1,5 +1,22 @@
 { config, pkgs, ... }:
 
+let
+  wechatWrapped = pkgs.symlinkJoin {
+    name = "wechat-fcitx";
+    paths = [ pkgs.wechat ];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      rm "$out/bin/wechat"
+      makeWrapper "${pkgs.wechat}/bin/wechat" "$out/bin/wechat" \
+        --set GTK_IM_MODULE fcitx \
+        --set QT_IM_MODULE fcitx \
+        --set XMODIFIERS "@im=fcitx" \
+        --set SDL_IM_MODULE fcitx \
+        --set QT_QPA_PLATFORM xcb
+    '';
+  };
+in
+
 {
   programs.direnv.enable = true;
 
@@ -74,7 +91,7 @@
     google-chrome
     spotify
     telegram-desktop
-    wechat-uos
+    wechatWrapped
     libreoffice-qt
     typora
     obsidian

@@ -29,6 +29,7 @@
       "left": [
         {
           "colorizeSystemIcon": "none",
+          "colorizeSystemText": "none",
           "customIconPath": "",
           "enableColorization": false,
           "icon": "rocket",
@@ -216,6 +217,7 @@
         {
           "colorizeDistroLogo": false,
           "colorizeSystemIcon": "secondary",
+          "colorizeSystemText": "none",
           "customIconPath": "",
           "enableColorization": true,
           "icon": "noctalia",

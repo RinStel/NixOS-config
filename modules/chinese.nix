@@ -1,5 +1,23 @@
 { config, pkgs, lib, ... }: {
 # 设置系统的中文环境
+  i18n.inputMethod.fcitx5.addons =
+    with pkgs;
+    [
+      qt6Packages.fcitx5-chinese-addons # fcitx5-chinese-addons
+      fcitx5-gtk
+      qt6Packages.fcitx5-configtool  # fcitx5-configtool
+      fcitx5-nord
+    ]
+    ++ lib.optionals (pkgs ? libsForQt5 && pkgs.libsForQt5 ? fcitx5-qt) [
+      pkgs.libsForQt5.fcitx5-qt
+    ]
+    ++ lib.optionals (pkgs ? kdePackages && pkgs.kdePackages ? fcitx5-qt) [
+      pkgs.kdePackages.fcitx5-qt
+    ]
+    ++ lib.optionals (pkgs ? qt6Packages && pkgs.qt6Packages ? fcitx5-qt) [
+      pkgs.qt6Packages.fcitx5-qt
+    ];
+
   i18n = {
     defaultLocale = "zh_CN.UTF-8";
     extraLocaleSettings = {
@@ -21,12 +39,6 @@
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.addons = with pkgs; [
-    qt6Packages.fcitx5-chinese-addons # fcitx5-chinese-addons
-    fcitx5-gtk
-    qt6Packages.fcitx5-configtool  # fcitx5-configtool
-    fcitx5-nord 
-   ];
    fcitx5.waylandFrontend = true;
   };
 
