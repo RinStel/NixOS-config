@@ -38,7 +38,7 @@
     enable = true;
 
     trustedInterfaces = [ "eno1" ]; # 没事就别tm瞎开防火墙
-    allowedUDPPorts = [ 10003 ];    # 保命: 指定放行端口
+    allowedUDPPorts = [ 10003 10020 20011 30011 ];    # 保命: 指定放行端口
   };
 
   # DNS
