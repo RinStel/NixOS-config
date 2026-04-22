@@ -80,7 +80,9 @@ in
     # 开发相关依赖
     nodejs
     pnpm
-    conda
+    #conda
+    cutecom       # 串口调试工具
+    serial-studio # 串口
 
     # Vibe Coding
     #claude-code 暂时禁用
@@ -92,6 +94,7 @@ in
     spotify
     telegram-desktop
     wechatWrapped
+    qq
     libreoffice-qt
     typora
     obsidian

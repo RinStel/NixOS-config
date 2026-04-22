@@ -85,6 +85,7 @@ layout {
         // proportion 0.33333  // 1/3宽度
         proportion 0.5       // 1/2宽度
         proportion 0.66667   // 2/3宽度
+        proportion 0.80      // 4/5宽度
         proportion 1.0       // 全宽
     }
 
@@ -212,6 +213,18 @@ window-rule {
 window-rule {
     match app-id="code"
     open-maximized true
+}
+
+// CCS
+window-rule {
+    match app-id="Code Composer Studio"
+    open-maximized true
+}
+
+// Serial-Studio 串口调试
+window-rule {
+   match app-id=r#"^io\.github\.serial-studio\.$"#
+   draw-border-with-background false
 }
 
 // lumina
