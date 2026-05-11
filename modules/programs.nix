@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   wechatWrapped = pkgs.symlinkJoin {
@@ -68,6 +68,7 @@ in
     nemo
     nemo-fileroller  # nemo 压缩包处理插件
     steamcmd  # steam workshop下载工具
+    wireshark
 
     # 娱乐
     protonplus
@@ -103,6 +104,15 @@ in
 
   # ToDesk
   #services.todesk.enable = true;
+
+  # wireshark
+  programs.wireshark = {
+    enable = true;
+    dumpcap.enable = true;
+    # 抓 USB 包时再开
+    # usbmon.enable = true;
+  };
+  users.users.zikun.extraGroups = lib.mkAfter [ "wireshark" ];
 
   services.flatpak = {
     enable = true;

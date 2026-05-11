@@ -35,7 +35,7 @@
   networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   networking.firewall = {
-    enable = true;
+    enable = false;
 
     trustedInterfaces = [ "eno1" ]; # 没事就别tm瞎开防火墙
     allowedUDPPorts = [ 10003 10020 20011 30011 ];    # 保命: 指定放行端口

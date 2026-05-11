@@ -394,7 +394,7 @@ binds {
     Mod+W { toggle-column-tabbed-display; }       // 当前列标签/堆叠切换
 
     // -------- 系统操作 --------
-    Mod+Shift+E hotkey-overlay-title="退出 Niri" { quit skip-confirmation=true; }  // 退出 Niri（跳过确认）
+    //Mod+Shift+E hotkey-overlay-title="退出 Niri" { quit skip-confirmation=true; }  // 退出 Niri（跳过确认）
 
     // -------- 滚轮/触摸板手势 --------
     // 滚轮：工作区切换（带冷却时间）
