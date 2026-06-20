@@ -38,3 +38,6 @@ if [[ $- == *i* ]] && [[ -z "${SHELL_RC_LOADED:-}" ]]; then
         source ~/.local/share/blesh/ble.sh
     fi
 fi
+
+# 一些应用的环境变量
+export PATH=/home/zikun/.opencode/bin:$PATH

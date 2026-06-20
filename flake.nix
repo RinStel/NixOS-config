@@ -9,10 +9,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Warning: Noctalia v5 moved to github:noctalia-dev/noctalia and uses a
+    # different native TOML configuration model. This setup intentionally stays
+    # on the last v4 release because the v5 visual result is not yet a suitable
+    # replacement for the existing v4 shell configuration.
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      url = "github:noctalia-dev/noctalia-shell/v4.7.7";
       inputs.nixpkgs.follows = "nixpkgs";
-     # inputs.quickshell.follows = "quickshell";
     };
 
     home-manager = {

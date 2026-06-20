@@ -209,6 +209,12 @@ window-rule {
     open-maximized true
 }
 
+// Chrome 窗口规则
+window-rule {
+    match app-id="chrome"
+    open-maximized true
+}
+
 // VSCode 窗口规则
 window-rule {
     match app-id="code"

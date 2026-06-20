@@ -37,6 +37,7 @@
 
   home-manager.users.zikun = { config, pkgs, lib, ... }: {
     home.packages = with pkgs; [
+      findutils
       gpu-screen-recorder
       gpu-screen-recorder-gtk
     ];
@@ -45,6 +46,9 @@
       inputs.noctalia.homeModules.default
     ];
 
+    # Warning: This is the v4 Home Manager module name from noctalia-shell.
+    # v5 uses programs.noctalia plus ~/.config/noctalia/config.toml, while v4
+    # uses programs.noctalia-shell plus JSON settings/plugins files.
     programs.noctalia-shell.enable = true;
 
     # 把“种子配置”放到 XDG 里

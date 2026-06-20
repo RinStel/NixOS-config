@@ -133,7 +133,7 @@
           "showApplicationsHover": false,
           "showBadge": true,
           "showLabelsOnlyWhenOccupied": true,
-          "unfocusedIconsOpacity": 0.7000000000000001
+          "unfocusedIconsOpacity": 0.7
         }
       ],
       "right": [
@@ -210,7 +210,7 @@
             "fillMode": "fit",
             "mpvSocket": "/tmp/mpv-socket",
             "profile": "default",
-            "wallpapersFolder": "~/Pictures/Wallpapers"
+            "wallpapersFolder": "/home/zikun/Pictures/Wallpapers"
           },
           "id": "plugin:mpvpaper"
         },
@@ -256,7 +256,7 @@
     "showHibernateOnLockScreen": true,
     "enableLockScreenMediaControls": false,
     "enableShadows": true,
-    "enableBlurBehind": true,
+    "enableBlurBehind": false,
     "shadowDirection": "bottom_right",
     "shadowOffsetX": 2,
     "shadowOffsetY": 3,
@@ -783,7 +783,7 @@
     "notifyUpdates": true
   },
   "idle": {
-    "enabled": false,
+    "enabled": true,
     "screenOffTimeout": 315,
     "lockTimeout": 355,
     "suspendTimeout": 1800,
